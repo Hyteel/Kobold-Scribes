@@ -1,4 +1,7 @@
 /*******************************************************************************************
+--KOBOLD SCRIBES--
+
+
 Spacemacs stuff
 
 Compile command: cc main.cpp -lraylib -lGL -lm -lpthread -ldl -lrt -lX11
@@ -11,6 +14,8 @@ Save all buffers: C-u C-x s
 
 
 #include "raylib.h"
+#inlcude "CONSTANTS.h"
+
 
 //------------------------------------------------------------------------------------
 // Program main entry point
