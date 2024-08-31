@@ -14,7 +14,7 @@ Save all buffers: C-u C-x s
 
 
 #include "raylib.h"
-#inlcude "CONSTANTS.h"
+#include "CONSTANTS.h"
 
 
 //------------------------------------------------------------------------------------
@@ -24,7 +24,7 @@ int main(void)
 {
     // Initialization
     //--------------------------------------------------------------------------------------
-    const int screenWidth = 800;
+    const int screenWidth = TESTTEST;
     const int screenHeight = 450;
 
     InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window1");
