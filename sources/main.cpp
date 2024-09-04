@@ -10,10 +10,17 @@ Cut: C-w
 Copy: M-w
 Save all buffers: C-u C-x s
 
+
+Todo:
+Vizualize tiles
+Select and highlight tiles
+Change tile state after selection
+
 ********************************************************************************************/
 
 
 #include "raylib.h"
+
 #include "GameMaster.h"
 
 
@@ -22,39 +29,42 @@ Save all buffers: C-u C-x s
 //------------------------------------------------------------------------------------
 int main(void)
 {
-    // Raylib Initialization
-    //--------------------------------------------------------------------------------------
-    const int screenWidth = 800;
-    const int screenHeight = 450;
+  // Raylib Initialization 
+  //--------------------------------------------------------------------------------------
+  const int screenWidth = TILESIZE * MAPTILEWIDTH;
+  const int screenHeight = TILESIZE * MAPTILEHEIGHT;
+  InitWindow(screenWidth, screenHeight,
+             "raylib [core] example - basic window1");
 
-    InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window1");
+  SetTargetFPS(60); // Set our game to run at 60 frames-per-second
+  //--------------------------------------------------------------------------------------
+  // Game Initialization
+  GameInformation GameInformationMain;
+  GameInformationMain.InitializeGameInfornamtion();
+  GameInformationMain.DisplayTileInformation();
 
-    SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
-    //--------------------------------------------------------------------------------------
-    //Game Initialization 
-    GameInformation GameInformationMain;
-    GameInformationMain.InitializeGameInfornamtion();
-    GameInformationMain.DisplayTileInformation();
+  // Main game loop
+  while (!WindowShouldClose()) // Detect window close button or ESC key
+  {
+    // Update
+    //----------------------------------------------------------------------------------
+    // TODO: Update your variables here
+    //----------------------------------------------------------------------------------
 
+    HandleInputs(&GameInformationMain);
 
-    // Main game loop
-    while (!WindowShouldClose())    // Detect window close button or ESC key
-    {
-        // Update
-        //----------------------------------------------------------------------------------
-        // TODO: Update your variables here
-        //----------------------------------------------------------------------------------
+    // Draw
+    //----------------------------------------------------------------------------------
+    BeginDrawing();
 
-        // Draw
-        //----------------------------------------------------------------------------------
-        BeginDrawing();
+    DrawGame(GameInformationMain);
+    ClearBackground(RAYWHITE);
 
-            ClearBackground(RAYWHITE);
+    //DrawText("Congrats! You created your first window!", 190, 200, 20,
+    //         LIGHTGRAY);
 
-            DrawText("Congrats! You created your first window!", 190, 200, 20, LIGHTGRAY);
-
-        EndDrawing();
-        //----------------------------------------------------------------------------------
+    EndDrawing();
+    //----------------------------------------------------------------------------------
     }
 
     // De-Initialization

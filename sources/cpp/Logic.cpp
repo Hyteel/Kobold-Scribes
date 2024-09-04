@@ -1,5 +1,8 @@
+#include "CONSTANTS.h"
 #include "GameMaster.h"
 #include "iostream"
+#include "raylib.h"
+#include <cmath>
 
 void GameInformation::InitializeGameInfornamtion()
 {
@@ -7,7 +10,10 @@ void GameInformation::InitializeGameInfornamtion()
             {
               for (int ih = 0; ih < MAPTILEHEIGHT; ih++)
                 {
-                  Tiles[iw][ih].ID = ih + iw*MAPTILEHEIGHT;
+                  GameTileGeneric* CurrentTile = &Tiles[iw][ih];
+                  CurrentTile->ID = ih + iw*MAPTILEHEIGHT;
+                  CurrentTile->Type = TileType(GetRandomValue(1, 4));
+                  CurrentTile->Position = Vector2{static_cast<float>(iw)*TILESIZEF, static_cast<float>(ih)*TILESIZEF};
                 }
             }
 }
@@ -23,3 +29,34 @@ void GameInformation::DisplayTileInformation()
         }
     }
 }
+
+
+void HandleInputs(GameInformation *Info)
+{
+  Vector2 MousePosition = GetMousePosition();
+
+  if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+    {
+      int MouseTileX = std::floor(MousePosition.x/TILESIZEF);
+      int MouseTileY = std::floor(MousePosition.y / TILESIZEF);
+      Info->CurrentTile = &Info->Tiles[MouseTileX][MouseTileY];
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
