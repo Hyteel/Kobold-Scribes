@@ -15,5 +15,5 @@ struct GameInformation {
 };
 
 void DrawGame(GameInformation &Info);
-void HandleInputs(GameInformation *Info);
+void HandleInputs(GameInformation *Info, const Camera2D &Camera);
 

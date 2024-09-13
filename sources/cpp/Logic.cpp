@@ -31,16 +31,16 @@ void GameInformation::DisplayTileInformation()
 }
 
 
-void HandleInputs(GameInformation *Info)
+void HandleInputs(GameInformation *Info, const Camera2D &Camera)
 {
-  Vector2 MousePosition = GetMousePosition();
+  Vector2 MousePosition = GetScreenToWorld2D(GetMousePosition(), Camera);
 
-  if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
-    {
-      int MouseTileX = std::floor(MousePosition.x/TILESIZEF);
-      int MouseTileY = std::floor(MousePosition.y / TILESIZEF);
-      Info->CurrentTile = &Info->Tiles[MouseTileX][MouseTileY];
-    }
+  if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+    int MouseTileX = std::floor(MousePosition.x / TILESIZEF);
+    int MouseTileY = std::floor(MousePosition.y / TILESIZEF);
+
+    Info->CurrentTile = &Info->Tiles[MouseTileX][MouseTileY];
+  }
 }
 
 
