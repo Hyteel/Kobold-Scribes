@@ -7,6 +7,8 @@ constexpr int TESTTEST = 5;
 constexpr int MAPTILEWIDTH = 20;
 constexpr int MAPTILEHEIGHT = 20;
 
+constexpr int SCREENWIDTH = TILESIZE*MAPTILEWIDTH;
+constexpr int SCREENHEIGHT = TILESIZE*MAPTILEHEIGHT;
 
 
 constexpr Color TILECOLORS[6] =
