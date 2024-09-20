@@ -1,19 +1,27 @@
 #pragma once
 
+#include "Goods.h"
 #include "TileStructure.h"
 #include "CONSTANTS.h"
 #include "UISystem.h"
 
 
+struct InputInformation {
+  GameTileGeneric* CurrentTile = nullptr;
+  int CurrentSelectedBuildingSlot = 0;
+};
+
+
 struct GameInformation {
   GameTileGeneric Tiles[MAPTILEWIDTH][MAPTILEHEIGHT];
   UIContext _UIContext;
+  InputInformation _InputInformation;
+
+  Market Markets[MARKETCOUNT];
 
   void InitializeGameInfornamtion();
   void DisplayTileInformation();
-
-  GameTileGeneric* CurrentTile = nullptr;
-  GameTileGeneric* OldTile = nullptr;
+  void ConductGameLogic();
 };
 
 void DrawGame(GameInformation &Info);

@@ -1,3 +1,4 @@
+#include "Buildings.h"
 #include "CONSTANTS.h"
 #include "GameMaster.h"
 #include "iostream"
@@ -27,6 +28,29 @@ void GameInformation::DisplayTileInformation()
         {
           std::cout << "Tile: " << iw << " | " << ih << " || ID: " << Tiles[iw][ih].ID << "\n"; 
         }
+    }
+}
+
+
+void Market::ConductMarketLogic()
+{
+  for (int i = 0; i < MarketTiles.size(); i++)
+    {
+      for (int i2 = 0; i2 < BUILDINGSLOTS; i2++)
+        {
+          CBBUILDINGS[MarketTiles[i]->Buildings[i2]]->BuildingTick(this); 
+        }
+    }
+}
+
+
+
+
+void GameInformation::ConductGameLogic()
+{
+  for (int i = 0; i < MARKETCOUNT; i++)
+    {
+      Markets[i].ConductMarketLogic();
     }
 }
 

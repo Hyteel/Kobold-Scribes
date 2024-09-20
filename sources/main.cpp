@@ -53,6 +53,8 @@ int main(void)
 
   UIInput UIInputOutput;
 
+  int TickCounter = 0;
+
   // Main game loop
   while (!WindowShouldClose()) // Detect window close button or ESC key
   {
