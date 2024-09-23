@@ -2,6 +2,7 @@
 #include "GameMaster.h"
 #include "raylib.h"
 #include "raygui.h"
+#include "iostream"
 
 UIInput HandleUI(const GameInformation &GMInfo)    {
   UIInput ReturnInput = Null;
@@ -35,8 +36,6 @@ UIInput HandleUI(const GameInformation &GMInfo)    {
     }
 
 
-  if (ReturnInput == Null) {return ReturnInput; }
-
   if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
     {
       Vector2 MousePos =  GetMousePosition();
@@ -56,6 +55,7 @@ UIInput HandleUI(const GameInformation &GMInfo)    {
           return ReturnInput;
         }
     }
+
 
   return ReturnInput;
 }

@@ -8,7 +8,7 @@ constexpr int MAPTILEWIDTH = 20;
 constexpr int MAPTILEHEIGHT = 20;
 
 constexpr int SCREENWIDTH = 1280; //TILESIZE*MAPTILEWIDTH;
-  constexpr int SCREENHEIGHT = 720; //TILESIZE*MAPTILEHEIGHT;
+constexpr int SCREENHEIGHT = 720; //TILESIZE*MAPTILEHEIGHT;
 
 constexpr int FPS = 60;
 constexpr int TICKRATE = 60;
@@ -26,4 +26,6 @@ constexpr Color TILECOLORS[6] =
   GRAY,
   BROWN,
   WHITE,
-};   
+};
+
+

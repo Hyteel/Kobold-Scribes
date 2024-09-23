@@ -2,6 +2,8 @@
 #include "CONSTANTS.h"
 #include "GameMaster.h"
 #include "iostream"
+#include "LOCALISATION.h"
+#include <string>
 
 void UIContext::InitializeUIContext(const GameInformation &GMInfo) {
   //Tile UI
@@ -89,6 +91,37 @@ void UIContext::InitializeUIContext(const GameInformation &GMInfo) {
 
   UIElements.push_back(BuildingUI);
 
+  //HUD
+  UIElement HUD;
+
+  HUD.Bounds = (Rectangle){0.f, 0.f, (SCREENWIDTH), (SCREENHEIGHT/10.f)};
+
+  HUD.DisplayText = "HUD";
+
+  HUD.Buttons = {};
+
+  HUD.ButtonText = {};
+
+  HUD.ButtonResponse = {};
+
+  HUD.TextFields = {
+    (Rectangle){0.f, 5.f, (SCREENWIDTH/10.f), (SCREENHEIGHT/10.f) - 20.f},
+    (Rectangle){(SCREENWIDTH/10.f), 5.f, (SCREENWIDTH/10.f), (SCREENHEIGHT/10.f) - 20.f},
+    (Rectangle){(SCREENWIDTH/10.f)*2.f + 50, 5.f, (SCREENWIDTH/10.f), (SCREENHEIGHT/10.f) - 20.f},
+    (Rectangle){(SCREENWIDTH/10.f)*3.f + 50, 5.f, (SCREENWIDTH/10.f), (SCREENHEIGHT/10.f) - 20.f},
+    (Rectangle){SCREENWIDTH - ((SCREENWIDTH/10.f) + 50), 5.f, (SCREENWIDTH/10.f), (SCREENHEIGHT/10.f) - 20.f},
+  };
+
+  HUD.Text = {
+    "0",
+    "0",
+    "0",
+    "0",
+    "0"
+  };
+
+
+  UIElements.push_back(HUD);
   //-------------------------------------------
   for (int i = 0; i < UIElements.size(); i++)
     {
@@ -97,10 +130,16 @@ void UIContext::InitializeUIContext(const GameInformation &GMInfo) {
 }
 
 
-void UIContext::UpdateUIContext(const GameInformation &GMInfo)
+void UIContext::UpdateUIContext(const GameInformation &GMInfo) //Only needs to update on UI input
 {
+  //TileUI
   if (GMInfo._InputInformation.CurrentTile != nullptr)
     {
+      for (int i = 0; i < UIElements[0].ButtonText.size(); i++)
+        {
+          UIElements[0].ButtonText[i] = LOC_BUILDINGS[GMInfo._InputInformation.CurrentTile->Buildings[i]]; 
+        }
+
       UIElements[0].Text = {
         std::to_string(GMInfo._InputInformation.CurrentTile->Value).c_str()
       };
@@ -111,5 +150,16 @@ void UIContext::UpdateUIContext(const GameInformation &GMInfo)
         ((std::string) "NULLPTR").c_str()
       };
     }
+
+
+  //HUD
+  for (int i = 1; i < GOODSCOUNT; i++)
+    {
+      std::string HudText = LOC_GOODS[i] + std::to_string(GMInfo.Markets[0].Goods[i]);
+      UIElements[2].Text[i - 1] = HudText;
+    }
+
+  std::string HudDate = "Date: Week " + std::to_string(GMInfo.WeekCounter) + " |  Day " + std::to_string(GMInfo.DayCounter);
+  UIElements[2].Text[4] = HudDate;
 }
 

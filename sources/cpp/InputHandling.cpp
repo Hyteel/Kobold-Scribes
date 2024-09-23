@@ -2,7 +2,7 @@
 #include "UISystem.h"
 #include "math.h"
 #include "algorithm"
-
+#include "iostream"
 
 
 
@@ -18,7 +18,7 @@ void UiInterferenceInput (GameInformation *Info, Camera2D *Camera)
 
     Info->_InputInformation.CurrentTile = &Info->Tiles[MouseTileX][MouseTileY];
     Info->_UIContext.UIElementDisplayTrigger[0] = true;
-    Info->_UIContext.UIElementDisplayTrigger[1] = true;
+    // Info->_UIContext.UIElementDisplayTrigger[1] = true;
   }
 }
 
@@ -29,7 +29,7 @@ void HandleInputs(GameInformation *Info, Camera2D *Camera, const UIInput &_UIInp
   Camera->zoom = std::clamp(Camera->zoom + (GetMouseWheelMove()*0.1f), 1.f, 10.f);
   Camera->target = (Vector2) {Camera->target.x + -1.f*Camera->zoom*(IsKeyDown(KEY_A) - IsKeyDown(KEY_D)), Camera->target.y + -1.f*Camera->zoom*(IsKeyDown(KEY_W) - IsKeyDown(KEY_S))};
 
-  if (IsKeyPressed(KEY_Q)) { Info->_UIContext.UIElementDisplayTrigger[0] = false;}
+  if (IsKeyPressed(KEY_Q)) { Info->_UIContext.UIElementDisplayTrigger[0] = false; Info->_UIContext.UIElementDisplayTrigger[1] = false;}
   if (IsKeyPressed(KEY_E)) { Info->Markets[0].MarketTiles.push_back(Info->_InputInformation.CurrentTile);}
 
   //UI Input
@@ -60,7 +60,8 @@ void HandleInputs(GameInformation *Info, Camera2D *Camera, const UIInput &_UIInp
       if (Iterator != Info->Markets[0].MarketTiles.end()) //Does the players market contain the currently selected tile?
         {
           int Index = Iterator - Info->Markets[0].MarketTiles.begin();
-          Info->Markets[0].MarketTiles[Index]->Buildings[Info->_InputInformation.CurrentSelectedBuildingSlot] = BuildingType(_UIInput - 6);
+          BuildingType BType = static_cast<BuildingType>(_UIInput - 5);
+          Info->Markets[0].MarketTiles[Index]->Buildings[Info->_InputInformation.CurrentSelectedBuildingSlot] = BType;
         }
       else
         {

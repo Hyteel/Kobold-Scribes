@@ -1,5 +1,6 @@
 #pragma once
 
+#include "CONSTANTS.h"
 #include "raylib.h"
 #include "Buildings.h"
 
@@ -21,7 +22,7 @@ struct GameTileGeneric {
 
   Vector2 Position = {};
 
-  BuildingType Buildings[4] = {NoBuildingType, NoBuildingType, NoBuildingType, NoBuildingType};
+  BuildingType Buildings[BUILDINGSLOTS] = {NoBuildingType, NoBuildingType, NoBuildingType, NoBuildingType};
 
   void DrawTile(int Special);
 };

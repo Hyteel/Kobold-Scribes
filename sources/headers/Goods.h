@@ -18,7 +18,7 @@ struct Market {
   float Money;
   float Influence;
 
-  float Goods[GOODSCOUNT];
+  float Goods[GOODSCOUNT] = {0.f,0.f,0.f,0.f,0.f};
 
   std::vector<GameTileGeneric*> MarketTiles;
 

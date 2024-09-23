@@ -17,11 +17,17 @@ struct GameInformation {
   UIContext _UIContext;
   InputInformation _InputInformation;
 
+  //Iteration 1 of date system
+  int DayCounter = 0;
+  int WeekCounter = 0;
+  //
+
   Market Markets[MARKETCOUNT];
 
   void InitializeGameInfornamtion();
   void DisplayTileInformation();
-  void ConductGameLogic();
+  void ConductDayTick();
+  void ConductWeekTick();
 };
 
 void DrawGame(GameInformation &Info);

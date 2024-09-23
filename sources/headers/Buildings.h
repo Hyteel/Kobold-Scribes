@@ -23,6 +23,13 @@ struct Building {
 
 
 // Building definitions
+const Building CBEmpty{ // ConstantBuildingEmpty
+  NoBuildingType,
+  std::vector<GoodsType>{},
+  std::vector<GoodsType>{},
+  std::vector<float>{},
+  std::vector<float>{}};
+
 const Building CBLumberyard{ // ConstantBuildingLumberyard
     Lumberyard,
     std::vector<GoodsType>{},
@@ -51,7 +58,7 @@ const Building CBCannery{ // ConstantBuildingCannery
   std::vector<float>{5.f, 5.f, 5.f},
   std::vector<float>{1.f}};
 
-constexpr const Building* CBBUILDINGS[] = {&CBLumberyard, &CBMine, &CBFarm, &CBCannery};
+constexpr const Building* CBBUILDINGS[] = {&CBEmpty, &CBLumberyard, &CBMine, &CBFarm, &CBCannery};
 
 
 

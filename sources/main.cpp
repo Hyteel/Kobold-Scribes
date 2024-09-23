@@ -18,6 +18,7 @@ Change tile state after selection
 
 ********************************************************************************************/
 
+#include "CONSTANTS.h"
 #include "UISystem.h"
 #define RAYGUI_IMPLEMENTATION
 
@@ -44,16 +45,20 @@ int main(void)
   MainCamera.zoom = 1.0f;
 
 
-  SetTargetFPS(60); // Set our game to run at 60 frames-per-second
+  SetTargetFPS(FPS); // Set our game to run at 60 frames-per-second
   //--------------------------------------------------------------------------------------
   // Game Initialization
   GameInformation GameInformationMain;
   GameInformationMain.InitializeGameInfornamtion();
   GameInformationMain._UIContext.InitializeUIContext(GameInformationMain);
 
+  GameInformationMain._UIContext.UIElementDisplayTrigger[2] = true;
+
   UIInput UIInputOutput;
 
   int TickCounter = 0;
+
+  std::cout << "Initialization done" << "\n";
 
   // Main game loop
   while (!WindowShouldClose()) // Detect window close button or ESC key
@@ -61,7 +66,39 @@ int main(void)
     // Update
     //----------------------------------------------------------------------------------
 
-    GameInformationMain._UIContext.UpdateUIContext(GameInformationMain);
+    //Every Frame
+
+    //std::cout << "FrameTick" << "\n";
+
+    TickCounter++;
+    GameInformationMain._UIContext.UpdateUIContext(GameInformationMain); //Only needs to update on UI input, low prio performance gain, keep for now
+
+    // std::cout << "FrameTick Done" << "\n";
+
+
+    //Every Day (Tick)
+    if (TickCounter == TICKRATE)
+      {
+        GameInformationMain.DayCounter++;
+        TickCounter = 0;
+
+        std::cout << "DayTick" << "\n";
+
+        GameInformationMain.ConductDayTick();
+      }
+
+
+    //Every Week
+    if (GameInformationMain.DayCounter == 7)
+      {
+        GameInformationMain.DayCounter = 0;
+        GameInformationMain.WeekCounter++;
+
+        std::cout << "WeekTick" << "\n";
+
+        GameInformationMain.ConductWeekTick();
+      }
+
 
     // Draw
     //----------------------------------------------------------------------------------
@@ -83,6 +120,7 @@ int main(void)
 
     //Input has to be handled here due to raygui
     UIInputOutput = HandleUI(GameInformationMain);
+
     HandleInputs(&GameInformationMain, &MainCamera, UIInputOutput);
 
     EndDrawing();
