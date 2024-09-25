@@ -3,8 +3,6 @@
 
 void Building::BuildingTick(Market *MarketToModify) const
 {
-  //std::cout << Type << "\n";
-
   if (Type == NoBuildingType) {return;}
 
   int UniqueInputs = InputTypes.size();
@@ -12,6 +10,12 @@ void Building::BuildingTick(Market *MarketToModify) const
 
 
   std::cout << UniqueInputs << " | " << UniqueOutputs << "\n";
+
+
+  for (int i = 0; i < UniqueInputs; i++) //Can it afford inputs?
+    {
+      if (MarketToModify->Goods[InputTypes[i]] - InputAmount[i] < 0) {return;}
+    }
 
   for (int i = 0; i < UniqueInputs; i++)
     {
@@ -24,4 +28,7 @@ void Building::BuildingTick(Market *MarketToModify) const
       std::cout << "Output: " << OutputAmount[i] << "\n";
       MarketToModify->Goods[OutputTypes[i]] += OutputAmount[i];
     }
+
+  MarketToModify->Influence += InfluenceGeneration;
+  MarketToModify->Money += MoneyGeneration;
 }

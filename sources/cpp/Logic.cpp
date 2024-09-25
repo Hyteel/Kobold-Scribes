@@ -17,6 +17,11 @@ void GameInformation::InitializeGameInfornamtion()
                   CurrentTile->Position = Vector2{static_cast<float>(iw)*TILESIZEF, static_cast<float>(ih)*TILESIZEF};
                 }
             }
+
+  for (int i = 0; i < MARKETCOUNT; i++)
+    {
+      Markets[i].IndexID = i;
+    }
 }
 
 
@@ -38,7 +43,7 @@ void Market::ConductMarketLogic()
     {
       for (int i2 = 0; i2 < BUILDINGSLOTS; i2++)
         {
-          std::cout << "Logic.cpp # ConductMarketLogic(): " << MarketTiles[i]->Buildings[i2] << " | i: " << i << " | i2: " << i2 << "\n";
+          // std::cout << "Logic.cpp # ConductMarketLogic(): " << MarketTiles[i]->Buildings[i2] << " | i: " << i << " | i2: " << i2 << "\n";
           CBBUILDINGS[MarketTiles[i]->Buildings[i2]]->BuildingTick(this); 
         }
     }
@@ -46,7 +51,13 @@ void Market::ConductMarketLogic()
 
 
 
-void GameInformation::ConductDayTick() {}
+void GameInformation::ConductDayTick()
+    {
+      for (int i = 0; i < MARKETCOUNT; i++)
+        {
+          Markets[i].Money += PASSIVEMONEYINCOME;
+        }
+    }
 
 
 void GameInformation::ConductWeekTick()

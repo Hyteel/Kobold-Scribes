@@ -11,10 +11,15 @@ enum UIInput {
   Tile_Slot2,
   Tile_Slot3,
   Tile_Slot4,
+  Tile_Slot5,
   Building_Slot1,
   Building_Slot2,
   Building_Slot3,
   Building_Slot4,
+  Building_Slot5,
+  Building_Slot6,
+  Building_Slot7,
+  Building_Slot8
 };
 
 

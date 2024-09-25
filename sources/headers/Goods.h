@@ -15,8 +15,9 @@ enum GoodsType {
 constexpr int GOODSCOUNT = 5;
 
 struct Market {
-  float Money;
-  float Influence;
+  int IndexID = 0.f;
+  float Money = 50.f;
+  float Influence = 50.f;
 
   float Goods[GOODSCOUNT] = {0.f,0.f,0.f,0.f,0.f};
 

@@ -17,6 +17,7 @@ enum TileType {
 struct GameTileGeneric {
   int ID = 0;
   TileType Type = Debug;
+  Market *Owner = nullptr;
 
   int Value = 0;
 

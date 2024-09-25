@@ -1,8 +1,11 @@
+#include "Buildings.h"
+#include "CONSTANTS.h"
 #include "GameMaster.h"
 #include "UISystem.h"
 #include "math.h"
 #include "algorithm"
 #include "iostream"
+#include "raylib.h"
 
 
 
@@ -16,9 +19,13 @@ void UiInterferenceInput (GameInformation *Info, Camera2D *Camera)
     int MouseTileX = std::floor(MousePosition.x / TILESIZEF);
     int MouseTileY = std::floor(MousePosition.y / TILESIZEF);
 
+
+    if ((MouseTileX > MAPTILEWIDTH) || (MouseTileX < 0)) {return; }
+    if ((MouseTileY > MAPTILEHEIGHT) || (MouseTileY < 0)) {return; }
+    if (&Info->Tiles[MouseTileX][MouseTileY] == nullptr) {return;}
+
     Info->_InputInformation.CurrentTile = &Info->Tiles[MouseTileX][MouseTileY];
     Info->_UIContext.UIElementDisplayTrigger[0] = true;
-    // Info->_UIContext.UIElementDisplayTrigger[1] = true;
   }
 }
 
@@ -30,7 +37,7 @@ void HandleInputs(GameInformation *Info, Camera2D *Camera, const UIInput &_UIInp
   Camera->target = (Vector2) {Camera->target.x + -1.f*Camera->zoom*(IsKeyDown(KEY_A) - IsKeyDown(KEY_D)), Camera->target.y + -1.f*Camera->zoom*(IsKeyDown(KEY_W) - IsKeyDown(KEY_S))};
 
   if (IsKeyPressed(KEY_Q)) { Info->_UIContext.UIElementDisplayTrigger[0] = false; Info->_UIContext.UIElementDisplayTrigger[1] = false;}
-  if (IsKeyPressed(KEY_E)) { Info->Markets[0].MarketTiles.push_back(Info->_InputInformation.CurrentTile);}
+  //if (IsKeyPressed(KEY_E)) { Info->Markets[0].MarketTiles.push_back(Info->_InputInformation.CurrentTile);}
 
   //UI Input
   switch (_UIInput)
@@ -50,17 +57,37 @@ void HandleInputs(GameInformation *Info, Camera2D *Camera, const UIInput &_UIInp
       break;
       }
 
+    case Tile_Slot5:
+      {
+        if (Info->_InputInformation.CurrentTile->Owner != nullptr) {break;}
+        if (Info->Markets[0].Influence < INFLUENCEEXPANSIONCOST) {break;}
+        if (&Info->Markets[0] == Info->_InputInformation.CurrentTile->Owner) {break;} //already owned by player
+
+        Info->Markets[0].Influence -= INFLUENCEEXPANSIONCOST;
+        Info->_InputInformation.CurrentTile->Owner = &Info->Markets[0];
+        Info->Markets[0].MarketTiles.push_back(Info->_InputInformation.CurrentTile);
+
+        break;
+      }
 
     case Building_Slot1:
     case Building_Slot2:
     case Building_Slot3:
     case Building_Slot4:
+    case Building_Slot5:
+    case Building_Slot6:
+    case Building_Slot7:
       {
       auto Iterator = std::find(Info->Markets[0].MarketTiles.begin(), Info->Markets[0].MarketTiles.end(), Info->_InputInformation.CurrentTile);
       if (Iterator != Info->Markets[0].MarketTiles.end()) //Does the players market contain the currently selected tile?
         {
           int Index = Iterator - Info->Markets[0].MarketTiles.begin();
-          BuildingType BType = static_cast<BuildingType>(_UIInput - 5);
+          BuildingType BType = static_cast<BuildingType>(_UIInput - 6);
+
+          if (Info->Markets[0].Money < CBBUILDINGS[BType]->MoneyCost) {break;}
+
+
+          Info->Markets[0].Money -= CBBUILDINGS[BType]->MoneyCost;
           Info->Markets[0].MarketTiles[Index]->Buildings[Info->_InputInformation.CurrentSelectedBuildingSlot] = BType;
         }
       else
@@ -70,6 +97,14 @@ void HandleInputs(GameInformation *Info, Camera2D *Camera, const UIInput &_UIInp
       break;
       }
 
+
+    case Building_Slot8:
+      {
+        if (Info->Markets[0].Money < 500) {break;}
+        std::cout << "YOU WON";
+        WindowShouldClose();
+        break;
+      }
 
     default:
       {break;}
