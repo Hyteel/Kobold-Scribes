@@ -100,9 +100,9 @@ void HandleInputs(GameInformation *Info, Camera2D *Camera, const UIInput &_UIInp
 
     case Building_Slot8:
       {
-        if (Info->Markets[0].Money < 500) {break;}
+        if (Info->Markets[0].Money < WINCONMONEYCOST) {break;}
         std::cout << "YOU WON";
-        WindowShouldClose();
+        Info->EndGame = true;
         break;
       }
 

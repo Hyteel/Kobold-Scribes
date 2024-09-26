@@ -19,7 +19,11 @@ struct Market {
   float Money = 50.f;
   float Influence = 50.f;
 
+  float MoneyChange = 0.f;
+  float InfluenceChange = 0.f;
+
   float Goods[GOODSCOUNT] = {0.f,0.f,0.f,0.f,0.f};
+  float GoodsChange[GOODSCOUNT] = {0.f, 0.f, 0.f, 0.f, 0.f};
 
   std::vector<GameTileGeneric*> MarketTiles;
 

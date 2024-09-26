@@ -139,9 +139,21 @@ void UIContext::InitializeUIContext(const GameInformation &GMInfo) {
     (Rectangle){(SCREENWIDTH/10.f)*4.f + 50, 5.f, (SCREENWIDTH/10.f), (SCREENHEIGHT/10.f) - 20.f},
     (Rectangle){(SCREENWIDTH/10.f)*5.f + 50, 5.f, (SCREENWIDTH/10.f), (SCREENHEIGHT/10.f) - 20.f},
     (Rectangle){SCREENWIDTH - ((SCREENWIDTH/10.f) + 50), 5.f, (SCREENWIDTH/10.f), (SCREENHEIGHT/10.f) - 20.f},
+    (Rectangle){0.f, 5.f, (SCREENWIDTH/10.f), (SCREENHEIGHT/10.f) + 20.f},
+    (Rectangle){(SCREENWIDTH/10.f), 5.f, (SCREENWIDTH/10.f), (SCREENHEIGHT/10.f) + 20.f},
+    (Rectangle){(SCREENWIDTH/10.f)*2.f + 50, 5.f, (SCREENWIDTH/10.f), (SCREENHEIGHT/10.f) + 20.f},
+    (Rectangle){(SCREENWIDTH/10.f)*3.f + 50, 5.f, (SCREENWIDTH/10.f), (SCREENHEIGHT/10.f) + 20.f},
+    (Rectangle){(SCREENWIDTH/10.f)*4.f + 50, 5.f, (SCREENWIDTH/10.f), (SCREENHEIGHT/10.f) + 20.f},
+    (Rectangle){(SCREENWIDTH/10.f)*5.f + 50, 5.f, (SCREENWIDTH/10.f), (SCREENHEIGHT/10.f) + 20.f},
   };
 
   HUD.Text = {
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
     "0",
     "0",
     "0",
@@ -197,6 +209,7 @@ void UIContext::UpdateUIContext(const GameInformation &GMInfo) //Only needs to u
     {
       std::string HudText = LOC_GOODS[i] + std::to_string(GMInfo.Markets[0].Goods[i]);
       UIElements[2].Text[i - 1] = HudText;
+      UIElements[2].Text[i - 1 + 7] = std::to_string(GMInfo.Markets[0].GoodsChange[i]);
     }
 
   std::string HudMoney = "Money: " + std::to_string(GMInfo.Markets[0].Money);
@@ -207,5 +220,8 @@ void UIContext::UpdateUIContext(const GameInformation &GMInfo) //Only needs to u
 
   std::string HudDate = "Date: Week " + std::to_string(GMInfo.WeekCounter) + " |  Day " + std::to_string(GMInfo.DayCounter);
   UIElements[2].Text[6] = HudDate;
+
+  UIElements[2].Text[11] = std::to_string(GMInfo.Markets[0].MoneyChange);
+  UIElements[2].Text[12] = std::to_string(GMInfo.Markets[0].InfluenceChange);
 }
 

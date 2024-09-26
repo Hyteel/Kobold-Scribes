@@ -17,6 +17,8 @@ struct GameInformation {
   UIContext _UIContext;
   InputInformation _InputInformation;
 
+  bool EndGame = false;
+
   //Iteration 1 of date system
   int DayCounter = 0;
   int WeekCounter = 0;

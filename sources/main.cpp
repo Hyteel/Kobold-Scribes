@@ -61,7 +61,7 @@ int main(void)
   std::cout << "Initialization done" << "\n";
 
   // Main game loop
-  while (!WindowShouldClose()) // Detect window close button or ESC key
+  while ((!WindowShouldClose()) && (!GameInformationMain.EndGame)) // Detect window close button or ESC key
   {
     // Update
     //----------------------------------------------------------------------------------

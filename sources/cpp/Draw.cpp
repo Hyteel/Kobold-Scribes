@@ -23,12 +23,12 @@ void DrawGame(GameInformation &Info)
       for (int it = 0; it < Info.Markets[i].MarketTiles.size(); it++)
         {
           Vector2* Position = &Info.Markets[i].MarketTiles[it]->Position; 
-          DrawLine(Position->x, Position->y, Position->x + TILESIZE, Position->y, MARKETCOLORS[i]);
-          DrawLine(Position->x + TILESIZE, Position->y, Position->x + TILESIZE, Position->y + TILESIZE, MARKETCOLORS[i]);
+          DrawLineEx((Vector2) {Position->x, Position->y}, (Vector2) {Position->x + TILESIZE,  Position->y}, 3.f, MARKETCOLORS[i]);
+          DrawLineEx((Vector2) {Position->x + TILESIZE, Position->y}, (Vector2) {Position->x + TILESIZE, Position->y + TILESIZE}, 3.f, MARKETCOLORS[i]);
 
-          DrawLine(Position->x + TILESIZE, Position->y + TILESIZE, Position->x, Position->y + TILESIZE, MARKETCOLORS[i]);
+          DrawLineEx((Vector2) {Position->x + TILESIZE, Position->y + TILESIZE}, (Vector2) {Position->x, Position->y + TILESIZE}, 3.f, MARKETCOLORS[i]);
 
-          DrawLine(Position->x, Position->y + TILESIZE, Position->x, Position->y, MARKETCOLORS[i]);
+          DrawLineEx((Vector2) {Position->x, Position->y + TILESIZE}, (Vector2) {Position->x, Position->y}, 3.f, MARKETCOLORS[i]);
         }
     }
 }

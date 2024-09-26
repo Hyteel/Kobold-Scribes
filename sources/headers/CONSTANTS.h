@@ -11,12 +11,13 @@ constexpr int SCREENWIDTH = 1280; //TILESIZE*MAPTILEWIDTH;
 constexpr int SCREENHEIGHT = 720; //TILESIZE*MAPTILEHEIGHT;
 
 constexpr int FPS = 60;
-constexpr int TICKRATE = 60;
+constexpr int TICKRATE = 20;
 constexpr int MARKETCOUNT = 8;
 
 
 constexpr float INFLUENCEEXPANSIONCOST = 25.f;
 constexpr float PASSIVEMONEYINCOME = 1.f;
+constexpr float WINCONMONEYCOST = 500.f;
 
 constexpr int BUILDINGSLOTS = 4;
 
