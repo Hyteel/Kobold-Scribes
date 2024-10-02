@@ -3,7 +3,19 @@
 #include "GameMaster.h"
 #include "iostream"
 #include "LOCALISATION.h"
+#include <cmath>
+#include <sstream>
 #include <string>
+
+#define TFFD TruncateFloatForDisplay
+
+std::string TruncateFloatForDisplay(float FloatToTruncate)
+{
+  std::string ReturnString = std::to_string(FloatToTruncate);
+  ReturnString = ReturnString.substr(0, ReturnString.find('.') + 2);
+  return ReturnString;
+}
+
 
 void UIContext::InitializeUIContext(const GameInformation &GMInfo) {
   //Tile UI
@@ -95,24 +107,24 @@ void UIContext::InitializeUIContext(const GameInformation &GMInfo) {
 
   BuildingUI.TextFields = {
     (Rectangle){20.f, (SCREENHEIGHT/4.f) + 150.f, 350.f, 150.f},
-    /*(Rectangle){0.f + 75.f, (SCREENHEIGHT/4.f) + 150.f, 50.f, 150.f},
+    (Rectangle){0.f + 75.f, (SCREENHEIGHT/4.f) + 150.f, 50.f, 150.f},
     (Rectangle){0.f + 130.f, (SCREENHEIGHT/4.f) + 150.f, 50.f, 150.f},
     (Rectangle){0.f + 185.f, (SCREENHEIGHT/4.f) + 150.f, 50.f, 150.f},
     (Rectangle){0.f + 240.f, (SCREENHEIGHT/4.f) + 150.f, 50.f, 150.f},
     (Rectangle){0.f + 295.f, (SCREENHEIGHT/4.f) + 150.f, 50.f, 150.f},
-    (Rectangle){0.f + 350.f, (SCREENHEIGHT/4.f) + 150.f, 50.f, 150.f}*/
+    (Rectangle){0.f + 350.f, (SCREENHEIGHT/4.f) + 150.f, 50.f, 150.f}
   };
 
   std::cout << LOC_BUILDINGDESCRIPTION[1] << "\n";
 
   BuildingUI.Text = {
     LOC_BUILDINGDESCRIPTION[1],
-    /*LOC_BUILDINGDESCRIPTION[2],
+    LOC_BUILDINGDESCRIPTION[2],
     LOC_BUILDINGDESCRIPTION[3],
     LOC_BUILDINGDESCRIPTION[4],
     LOC_BUILDINGDESCRIPTION[5],
     LOC_BUILDINGDESCRIPTION[6],
-    LOC_BUILDINGDESCRIPTION[7],*/
+    LOC_BUILDINGDESCRIPTION[7],
   };
 
 
@@ -183,9 +195,10 @@ void UIContext::UpdateUIContext(const GameInformation &GMInfo) //Only needs to u
           UIElements[0].ButtonText[i] = LOC_BUILDINGS[GMInfo._InputInformation.CurrentTile->Buildings[i]];
         }
 
-      UIElements[0].Text[0] = std::to_string(GMInfo._InputInformation.CurrentTile->Value).c_str();
+      //UIElements[0].Text[0] = std::to_string(GMInfo._InputInformation.CurrentTile->Value).c_str();
+      UIElements[0].Text[0] = LOC_TERRAIN[GMInfo._InputInformation.CurrentTile->Type];
 
-      std::string MarketTileText = "Belongs to market: "; 
+      std::string MarketTileText = "Belongs to market: ";
 
       if (GMInfo._InputInformation.CurrentTile->Owner != nullptr)
         {
@@ -207,21 +220,21 @@ void UIContext::UpdateUIContext(const GameInformation &GMInfo) //Only needs to u
   //HUD
   for (int i = 1; i < GOODSCOUNT; i++)
     {
-      std::string HudText = LOC_GOODS[i] + std::to_string(GMInfo.Markets[0].Goods[i]);
+      std::string HudText = LOC_GOODS[i] + TFFD(GMInfo.Markets[0].Goods[i]);
       UIElements[2].Text[i - 1] = HudText;
-      UIElements[2].Text[i - 1 + 7] = std::to_string(GMInfo.Markets[0].GoodsChange[i]);
+      UIElements[2].Text[i - 1 + 7] = TFFD(GMInfo.Markets[0].GoodsChange[i]);
     }
 
-  std::string HudMoney = "Money: " + std::to_string(GMInfo.Markets[0].Money);
+  std::string HudMoney = "Money: " + TFFD(GMInfo.Markets[0].Money);
   UIElements[2].Text[4] = HudMoney;
 
-  std::string HudInfluence = "Influence: " + std::to_string(GMInfo.Markets[0].Influence);
+  std::string HudInfluence = "Influence: " + TFFD(GMInfo.Markets[0].Influence);
   UIElements[2].Text[5] = HudInfluence;
 
   std::string HudDate = "Date: Week " + std::to_string(GMInfo.WeekCounter) + " |  Day " + std::to_string(GMInfo.DayCounter);
   UIElements[2].Text[6] = HudDate;
 
-  UIElements[2].Text[11] = std::to_string(GMInfo.Markets[0].MoneyChange);
-  UIElements[2].Text[12] = std::to_string(GMInfo.Markets[0].InfluenceChange);
+  UIElements[2].Text[11] = TFFD(GMInfo.Markets[0].MoneyChange);
+  UIElements[2].Text[12] = TFFD(GMInfo.Markets[0].InfluenceChange);
 }
 

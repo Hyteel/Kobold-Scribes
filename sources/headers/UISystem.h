@@ -27,6 +27,7 @@ struct GameInformation; //Forward Declaration
 
 UIInput HandleUI(const GameInformation &GMInfo);
 
+std::string TruncateFloatForDisplay(float FloatToTruncate);
 
 struct UIElement {
   Rectangle Bounds;

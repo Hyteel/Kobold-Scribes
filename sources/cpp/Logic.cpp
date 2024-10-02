@@ -2,10 +2,13 @@
 #include "CONSTANTS.h"
 #include "GameMaster.h"
 #include "Goods.h"
+#include "LOCALISATION.h"
 #include "iostream"
 #include "raylib.h"
 #include <cmath>
 #include "AI.h"
+
+std::vector<std::string> LOC_BUILDINGDESCRIPTION;
 
 void GameInformation::InitializeGameInfornamtion()
 {
@@ -23,6 +26,13 @@ void GameInformation::InitializeGameInfornamtion()
   for (int i = 0; i < MARKETCOUNT; i++)
     {
       Markets[i].IndexID = i;
+    }
+
+  LOC_BUILDINGDESCRIPTION.push_back("DEBUG");
+
+  for (int i = 1; i < 8; i++)
+    {
+      LOC_BUILDINGDESCRIPTION.push_back(GenerateBuildingDescription(i));
     }
 }
 

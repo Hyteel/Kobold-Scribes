@@ -22,12 +22,13 @@ UIInput HandleUI(const GameInformation &GMInfo)    {
       GuiPanel((*UIElementsP)[i].Bounds, (*UIElementsP)[i].DisplayText.c_str());
 
       for (int ib = 0; ib < (*UIElementsP)[i].Buttons.size(); ib++)
-        { 
+        {
           if (GuiButton((*UIElementsP)[i].Buttons[ib], (*UIElementsP)[i].ButtonText[ib].c_str()))
             {
               ReturnInput = (*UIElementsP)[i].ButtonResponse[ib];
             }
         }
+
 
       for (int it = 0; it < (*UIElementsP)[i].TextFields.size(); it++)
         {

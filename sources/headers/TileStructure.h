@@ -13,6 +13,14 @@ enum TileType {
   Selected = 5,
 };
 
+constexpr bool ALLOWED_BUILDINGS_PER_TILETYPE[] = {
+  0, 0, 0, 0, 0, 0, 0, 0,
+  0, 1, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 1, 0, 0, 0, 0,
+  0, 0, 1, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 1, 1, 1, 1,
+};
+
 
 struct GameTileGeneric {
   int ID = 0;

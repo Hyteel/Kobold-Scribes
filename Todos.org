@@ -1,0 +1,41 @@
+#+TITLE: TODOS
+#+TITLE: A Version-Control Adaptation
+
+* Meta
+Will be planning on a week by week basis, might add backlog later.
+Things marked as [#C] are also in low prio - WLTD
+
+* Main
+** Documentation
+*** DONE Write this document
+CLOSED: [2024-10-02 Wed 14:34]
+*** TODO Write basic repo GDD/Flowchart
+*** TODO Determine missing mechanics before Milestone 3
+*** TODO Outline milestones in repo planning document
+** UI
+*** DOING Finish basic UI
+**** DONE Floating point 0 cutoff
+CLOSED: [2024-10-02 Wed 18:34]
+**** TODO Functioning building tooltips
+***** DONE Functional
+CLOSED: [2024-10-02 Wed 18:34]
+***** TODO [#C] Well implemented with hover over
+**** DONE Tile UI Additions, Terrain Type
+CLOSED: [2024-10-02 Wed 18:33]
+**** DOING [#C] Opens on same click if released over button
+** Systems
+*** TODO Revamp Goods system, no more infinite stockpile | Abundance - Deficit
+*** TODO Trade system
+*** TODO Probability table based AI
+** Mechanics
+*** TODO Only adjacent expansion - Influence system
+*** DONE Only certain buildings on certain terrain
+CLOSED: [2024-10-02 Wed 18:33]
+** Bugs
+*** TODO BUG | Game crashes after AI turn (Rarely)
+
+
+
+** Low Prio - WLTD
+*** TODO Write Bug Database file / system
+*** TODO Fix consistent code writing standard 

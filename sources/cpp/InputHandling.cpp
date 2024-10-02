@@ -1,6 +1,7 @@
 #include "Buildings.h"
 #include "CONSTANTS.h"
 #include "GameMaster.h"
+#include "TileStructure.h"
 #include "UISystem.h"
 #include "math.h"
 #include "algorithm"
@@ -86,7 +87,8 @@ void HandleInputs(GameInformation *Info, Camera2D *Camera, const UIInput &_UIInp
 
           if (Info->Markets[0].Money < CBBUILDINGS[BType]->MoneyCost) {break;}
 
-
+          if (!ALLOWED_BUILDINGS_PER_TILETYPE[BType + (8 * static_cast<int>(Info->_InputInformation.CurrentTile->Type))]) {break;}
+          
           Info->Markets[0].Money -= CBBUILDINGS[BType]->MoneyCost;
           Info->Markets[0].MarketTiles[Index]->Buildings[Info->_InputInformation.CurrentSelectedBuildingSlot] = BType;
         }

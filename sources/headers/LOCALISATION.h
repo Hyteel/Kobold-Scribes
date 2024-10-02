@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include "vector"
 
 const std::string LOC_BUILDINGS[9] = {
   "Empty",
@@ -21,17 +22,18 @@ const std::string LOC_GOODS[5] = {
   "Canned Bread: "
 };
 
+const std::string LOC_TERRAIN[5] = {
+  "Debug",
+  "Forest",
+  "Field",
+  "Mountain",
+  "City"
+};
+
 //Building Descriptions
 const std::string GenerateBuildingDescription(const int BuildingNumber);
 
-const std::string LOC_BUILDINGDESCRIPTION[9] = {
-  "Empty",
-  GenerateBuildingDescription(1),
-  GenerateBuildingDescription(2),
-  GenerateBuildingDescription(3),
-  GenerateBuildingDescription(4),
-  GenerateBuildingDescription(5),
-  GenerateBuildingDescription(6),
-  GenerateBuildingDescription(7),
-  GenerateBuildingDescription(8),
-};
+extern std::vector<std::string> LOC_BUILDINGDESCRIPTION;
+
+
+
