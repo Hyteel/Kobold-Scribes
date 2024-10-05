@@ -3,6 +3,7 @@
 #include "GameMaster.h"
 #include "iostream"
 #include "LOCALISATION.h"
+#include "raylib.h"
 #include <cmath>
 #include <sstream>
 #include <string>
@@ -107,24 +108,24 @@ void UIContext::InitializeUIContext(const GameInformation &GMInfo) {
 
   BuildingUI.TextFields = {
     (Rectangle){20.f, (SCREENHEIGHT/4.f) + 150.f, 350.f, 150.f},
-    (Rectangle){0.f + 75.f, (SCREENHEIGHT/4.f) + 150.f, 50.f, 150.f},
+    /*(Rectangle){0.f + 75.f, (SCREENHEIGHT/4.f) + 150.f, 50.f, 150.f},
     (Rectangle){0.f + 130.f, (SCREENHEIGHT/4.f) + 150.f, 50.f, 150.f},
     (Rectangle){0.f + 185.f, (SCREENHEIGHT/4.f) + 150.f, 50.f, 150.f},
     (Rectangle){0.f + 240.f, (SCREENHEIGHT/4.f) + 150.f, 50.f, 150.f},
     (Rectangle){0.f + 295.f, (SCREENHEIGHT/4.f) + 150.f, 50.f, 150.f},
-    (Rectangle){0.f + 350.f, (SCREENHEIGHT/4.f) + 150.f, 50.f, 150.f}
+    (Rectangle){0.f + 350.f, (SCREENHEIGHT/4.f) + 150.f, 50.f, 150.f}*/
   };
 
   std::cout << LOC_BUILDINGDESCRIPTION[1] << "\n";
 
   BuildingUI.Text = {
     LOC_BUILDINGDESCRIPTION[1],
-    LOC_BUILDINGDESCRIPTION[2],
+    /*LOC_BUILDINGDESCRIPTION[2],
     LOC_BUILDINGDESCRIPTION[3],
     LOC_BUILDINGDESCRIPTION[4],
     LOC_BUILDINGDESCRIPTION[5],
     LOC_BUILDINGDESCRIPTION[6],
-    LOC_BUILDINGDESCRIPTION[7],
+    LOC_BUILDINGDESCRIPTION[7],*/
   };
 
 
@@ -214,6 +215,26 @@ void UIContext::UpdateUIContext(const GameInformation &GMInfo) //Only needs to u
   else
     {
       UIElements[0].Text[0] = ((std::string) "NULLPTR").c_str();
+    }
+
+
+  //BuildingUI
+  //Mouseover tooltip - Buildings
+
+
+  /*(Rectangle){20.f, (SCREENHEIGHT/4.f) + 90.f, 50.f, 50.f},
+    (Rectangle){0.f + 75.f, (SCREENHEIGHT/4.f) + 90.f, 50.f, 50.f},
+    (Rectangle){0.f + 130.f, (SCREENHEIGHT/4.f) + 90.f, 50.f, 50.f},
+    (Rectangle){0.f + 185.f, (SCREENHEIGHT/4.f) + 90.f, 50.f, 50.f},
+    (Rectangle){0.f + 240.f, (SCREENHEIGHT/4.f) + 90.f, 50.f, 50.f},
+    (Rectangle){0.f + 295.f, (SCREENHEIGHT/4.f) + 90.f, 50.f, 50.f},
+    (Rectangle){0.f + 350.f, (SCREENHEIGHT/4.f) + 90.f, 50.f, 50.f},
+    (Rectangle){0.f + 240.f, (SCREENHEIGHT/4.f) + 30.f, 50.f, 50.f}*/
+
+  for (int i = 0; i < 7; i++)
+    {
+      Rectangle CurrentRec = {20.f + 55*i, (SCREENHEIGHT/4.f) + 90.f, 50.f, 50.f};
+      if (CheckCollisionPointRec(GetMousePosition(), CurrentRec)) {UIElements[1].Text[0] = LOC_BUILDINGDESCRIPTION[i + 1]; }
     }
 
 

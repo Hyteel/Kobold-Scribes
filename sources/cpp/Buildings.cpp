@@ -1,8 +1,12 @@
 #include "Buildings.h"
 #include "iostream"
+#include "CONSTANTS.h"
 
 void Building::BuildingTick(Market *MarketToModify) const
 {
+  if (DEBUGMODE) {  std::cout << "BuildingTick - Start" << "\n";}
+
+  if (MarketToModify == nullptr) {return;}
   if (Type == NoBuildingType) {return;}
 
   int UniqueInputs = InputTypes.size();
@@ -35,4 +39,6 @@ void Building::BuildingTick(Market *MarketToModify) const
   MarketToModify->Money += MoneyGeneration;
   MarketToModify->MoneyChange += MoneyGeneration;
   MarketToModify->InfluenceChange += InfluenceGeneration;
+
+  if (DEBUGMODE) {  std::cout << "BuildingTick - End" << "\n";}
 }

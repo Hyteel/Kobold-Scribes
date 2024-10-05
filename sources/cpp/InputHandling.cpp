@@ -7,6 +7,7 @@
 #include "algorithm"
 #include "iostream"
 #include "raylib.h"
+#include "raymath.h"
 
 
 
@@ -33,6 +34,8 @@ void UiInterferenceInput (GameInformation *Info, Camera2D *Camera)
 
 void HandleInputs(GameInformation *Info, Camera2D *Camera, const UIInput &_UIInput)
 {
+  if (DEBUGMODE) {  std::cout << "HandleInputs - Start" << "\n";} 
+
   //Input
   Camera->zoom = std::clamp(Camera->zoom + (GetMouseWheelMove()*0.1f), 1.f, 10.f);
   Camera->target = (Vector2) {Camera->target.x + -1.f*Camera->zoom*(IsKeyDown(KEY_A) - IsKeyDown(KEY_D)), Camera->target.y + -1.f*Camera->zoom*(IsKeyDown(KEY_W) - IsKeyDown(KEY_S))};
@@ -64,6 +67,20 @@ void HandleInputs(GameInformation *Info, Camera2D *Camera, const UIInput &_UIInp
         if (Info->Markets[0].Influence < INFLUENCEEXPANSIONCOST) {break;}
         if (&Info->Markets[0] == Info->_InputInformation.CurrentTile->Owner) {break;} //already owned by player
 
+        //Is the tile neighbouring another tile?
+
+        if (Info->Markets[0].MarketTiles.size() != 0)
+          {
+            bool HasFoundNeighbour = false;
+
+            for (int i = 0; i < Info->Markets[0].MarketTiles.size(); i++)
+              {
+                if (Vector2Distance(Info->_InputInformation.CurrentTile->Position, Info->Markets[0].MarketTiles[i]->Position) / TILESIZEF <= 1.f) {HasFoundNeighbour = true; break;}
+              }
+
+            if (HasFoundNeighbour == false) {break;}
+          }
+
         Info->Markets[0].Influence -= INFLUENCEEXPANSIONCOST;
         Info->_InputInformation.CurrentTile->Owner = &Info->Markets[0];
         Info->Markets[0].MarketTiles.push_back(Info->_InputInformation.CurrentTile);
@@ -88,7 +105,7 @@ void HandleInputs(GameInformation *Info, Camera2D *Camera, const UIInput &_UIInp
           if (Info->Markets[0].Money < CBBUILDINGS[BType]->MoneyCost) {break;}
 
           if (!ALLOWED_BUILDINGS_PER_TILETYPE[BType + (8 * static_cast<int>(Info->_InputInformation.CurrentTile->Type))]) {break;}
-          
+
           Info->Markets[0].Money -= CBBUILDINGS[BType]->MoneyCost;
           Info->Markets[0].MarketTiles[Index]->Buildings[Info->_InputInformation.CurrentSelectedBuildingSlot] = BType;
         }
@@ -111,4 +128,6 @@ void HandleInputs(GameInformation *Info, Camera2D *Camera, const UIInput &_UIInp
     default:
       {break;}
     }
+
+  if (DEBUGMODE) {  std::cout << "HandleInputs - End" << "\n";}
 }

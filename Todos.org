@@ -12,27 +12,34 @@ CLOSED: [2024-10-02 Wed 14:34]
 *** TODO Write basic repo GDD/Flowchart
 *** TODO Determine missing mechanics before Milestone 3
 *** TODO Outline milestones in repo planning document
+
 ** UI
 *** DOING Finish basic UI
 **** DONE Floating point 0 cutoff
 CLOSED: [2024-10-02 Wed 18:34]
-**** TODO Functioning building tooltips
+**** DONE Functioning building tooltips
+CLOSED: [2024-10-03 Thu 14:12]
 ***** DONE Functional
 CLOSED: [2024-10-02 Wed 18:34]
-***** TODO [#C] Well implemented with hover over
+***** DONE [#C] Well implemented with hover over
+CLOSED: [2024-10-03 Thu 14:12]
 **** DONE Tile UI Additions, Terrain Type
 CLOSED: [2024-10-02 Wed 18:33]
-**** DOING [#C] Opens on same click if released over button
+**** TODO [#C] Opens on same click if released over button [Cant really do without own UI system]
+
 ** Systems
-*** TODO Revamp Goods system, no more infinite stockpile | Abundance - Deficit
+*** DOING Revamp Goods system, no more infinite stockpile | Abundance - Deficit
 *** TODO Trade system
 *** TODO Probability table based AI
+
 ** Mechanics
-*** TODO Only adjacent expansion - Influence system
+*** DONE Only adjacent expansion - Influence system
+CLOSED: [2024-10-03 Thu 14:12]
 *** DONE Only certain buildings on certain terrain
 CLOSED: [2024-10-02 Wed 18:33]
+
 ** Bugs
-*** TODO BUG | Game crashes after AI turn (Rarely)
+*** TODO BUG | Game crashes after AI turn (Rarely) 
 
 
 

@@ -1,5 +1,7 @@
 #pragma once
 #include "raylib.h"
+constexpr bool DEBUGMODE = true;
+
 constexpr int TILESIZE = 32;
 constexpr float TILESIZEF = 32.f;
 

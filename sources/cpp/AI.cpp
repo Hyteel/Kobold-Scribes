@@ -8,6 +8,7 @@
 
 void ConductAILogic(GameInformation *GMInfo, Market *AIMarket)
 {
+  if (DEBUGMODE) {  std::cout << "ConductAILogic - Start" << "\n";}
   //AI WIN
   if (AIMarket->Money >= WINCONMONEYCOST)
     {
@@ -28,6 +29,8 @@ void ConductAILogic(GameInformation *GMInfo, Market *AIMarket)
         }
     }
 
+  if (DEBUGMODE) {  std::cout << "ConductAILogic - Mid" << "\n";}
+
   //Buildings
   if (AIMarket->MarketTiles.size() == 0) {return;}
 
@@ -35,6 +38,8 @@ void ConductAILogic(GameInformation *GMInfo, Market *AIMarket)
 
   if (AIMarket->Money < CBBUILDINGS[BType]->MoneyCost) {return;}
   AIMarket->Money -= CBBUILDINGS[BType]->MoneyCost;
+
+  if (DEBUGMODE) {  std::cout << "ConductAILogic - Mid2" << "\n";}
 
   int RandomTile = GetRandomValue(0, AIMarket->MarketTiles.size() - 1);
 
@@ -46,4 +51,5 @@ void ConductAILogic(GameInformation *GMInfo, Market *AIMarket)
 
   SelectedTile->Buildings[GetRandomValue(0, 3)] = BType;
   AIMarket->Money -= CBBUILDINGS[BType]->MoneyCost;
+  if (DEBUGMODE) {  std::cout << "ConductAILogic - End" << "\n";}
 }

@@ -51,14 +51,17 @@ void GameInformation::DisplayTileInformation()
 
 void Market::ConductMarketLogic()
 {
+  if (DEBUGMODE) {  std::cout << "ConductMarketLogic - Start" << "\n";}
+
+  
   for (int i = 0; i < MarketTiles.size(); i++)
     {
       for (int i2 = 0; i2 < BUILDINGSLOTS; i2++)
         {
-          // std::cout << "Logic.cpp # ConductMarketLogic(): " << MaarketTiles[i]->Buildings[i2] << " | i: " << i << " | i2: " << i2 << "\n";
           CBBUILDINGS[MarketTiles[i]->Buildings[i2]]->BuildingTick(this); 
         }
     }
+  if (DEBUGMODE) {  std::cout << "ConductMarketLogic - End" << "\n";}
 }
 
 
@@ -74,7 +77,8 @@ void GameInformation::ConductDayTick()
 
 void GameInformation::ConductWeekTick()
   {
-    std::cout << "ConductWeekTick-Start" << "\n";
+    if (DEBUGMODE) {  std::cout << "ConductWeekTick - Start" << "\n";}
+
     for (int i = 0; i < MARKETCOUNT; i++)
       {
         Markets[i].InfluenceChange = 0;
@@ -87,7 +91,8 @@ void GameInformation::ConductWeekTick()
 
         if (i != 0) {ConductAILogic(this, &Markets[i]);}
       }
-    std::cout << "ConductWeekTick-End" << "\n";
+
+    if (DEBUGMODE) {  std::cout << "HandleInputs - End" << "\n";}
   }
 
 
