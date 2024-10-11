@@ -1,0 +1,54 @@
+#+TITLE: TODOS 1
+#+TITLE: A Version-Control Adaptation
+
+* Meta
+Will be planning on a week by week basis, might add backlog later.
+Things marked as [#C] are also in low prio - WLTD
+
+* Main
+** Documentation
+*** DONE Write this document
+CLOSED: [2024-10-02 Wed 14:34]
+*** DONE Write basic repo GDD/Flowchart
+CLOSED: [2024-10-08 Tue 17:55]
+*** DONE Determine missing mechanics before Milestone 3
+CLOSED: [2024-10-11 Fri 14:39]
+*** DONE Outline milestones in repo planning document
+CLOSED: [2024-10-08 Tue 17:55]
+
+** UI
+*** DOING Finish basic UI
+**** DONE Floating point 0 cutoff
+CLOSED: [2024-10-02 Wed 18:34]
+**** DONE Functioning building tooltips
+CLOSED: [2024-10-03 Thu 14:12]
+***** DONE Functional
+CLOSED: [2024-10-02 Wed 18:34]
+***** DONE [#C] Well implemented with hover over
+CLOSED: [2024-10-03 Thu 14:12]
+**** DONE Tile UI Additions, Terrain Type
+CLOSED: [2024-10-02 Wed 18:33]
+**** TODO [#C] Opens on same click if released over button [Cant really do without own UI system]
+
+** Systems
+*** DONE Revamp Goods system, no more infinite stockpile | Abundance - Deficit
+CLOSED: [2024-10-08 Tue 17:40]
+*** DONE Trade system
+CLOSED: [2024-10-08 Tue 17:40]
+*** DONE Probability table based AI
+CLOSED: [2024-10-11 Fri 14:39]
+
+** Mechanics
+*** DONE Only adjacent expansion - Influence system
+CLOSED: [2024-10-03 Thu 14:12]
+*** DONE Only certain buildings on certain terrain
+CLOSED: [2024-10-02 Wed 18:33]
+
+** Bugs
+*** TODO BUG | Game crashes after AI turn (Rarely) 
+
+
+
+** Low Prio - WLTD
+*** TODO Write Bug Database file / system
+*** TODO Fix consistent code writing standard 

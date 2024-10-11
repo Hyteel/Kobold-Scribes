@@ -1,0 +1,14 @@
+#+TITLE: PLAN
+
+Rest of the features/parts for the duration of this development course
+
+* Features
+** TODO [#A] Static world map - Top
+** TODO [#B] Specialized tiles
+** TODO [#B] More buildings/goods (chain at most 3 length)
+** TODO [#A] Building times
+
+* Art
+** TODO [#A] Tile art, world art - Top
+** TODO [#A] Building times
+** TODO [#C] UI redesign - New UI system
