@@ -1,0 +1,38 @@
+#+TITLE: Systems
+
+Organizing area for the various systems of Kobold Scribes
+[New organizational idea]
+
+* Goods System
+
+Current system goes as follows:
+
+Goods can be consumed and produced, consumed goods are removed from the stockpile IF there are enough of them in the stockpile.
+If not the goods stay in the stockpile. IF a building can consume the goods it needs it will produce the output goods.
+
+
+New system goes as follows:
+
+Goods can be consumed and produced and contribute to the national balance of said good.
+If there is a goods deficit the consumer works at a lower efficiency.
+If there is an abundance of a good, said good is open for trading. Trading gives influence and money
+(The abundance is traded with someone else's deficit)
+
+
+The code for this system goes as follows:
+
+Each tile has 4 potential buildings.
+Every building has a production/consumption.
+Every market (player) has a tile(s) with potential buildings on it.
+
+Every week-tick every market goes through every tile it owns and does a building-tick for every building it owns.
+[With last weeks efficiency]
+The output/consumption gets saved and a new efficiency for the buildings is generated.
+If there is an abundance it gets put on the "public market"
+
+A markets share of the public market is calculated after every markets turn
+
+Every +month+ week the following happens:
+If a good is present on the public market and a player has a deficit of said good then it is filled by the market and the providers are paid according to their ownership.
+
+For now the order is 0-9 but later on it might be "most influencial" - "least influencial"

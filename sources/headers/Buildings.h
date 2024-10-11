@@ -28,7 +28,8 @@ struct Building {
   float MoneyCost;
 
   void BuildingTick(Market *MarketToModify) const;
-};
+  void BuildingTick2(Market *MarketToModify) const;
+  };
 
 
 // Building definitions

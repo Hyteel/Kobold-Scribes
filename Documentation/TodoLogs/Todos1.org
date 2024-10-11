@@ -1,4 +1,4 @@
-#+TITLE: TODOS
+#+TITLE: TODOS 1
 #+TITLE: A Version-Control Adaptation
 
 * Meta
@@ -9,9 +9,12 @@ Things marked as [#C] are also in low prio - WLTD
 ** Documentation
 *** DONE Write this document
 CLOSED: [2024-10-02 Wed 14:34]
-*** TODO Write basic repo GDD/Flowchart
-*** TODO Determine missing mechanics before Milestone 3
-*** TODO Outline milestones in repo planning document
+*** DONE Write basic repo GDD/Flowchart
+CLOSED: [2024-10-08 Tue 17:55]
+*** DONE Determine missing mechanics before Milestone 3
+CLOSED: [2024-10-11 Fri 14:39]
+*** DONE Outline milestones in repo planning document
+CLOSED: [2024-10-08 Tue 17:55]
 
 ** UI
 *** DOING Finish basic UI
@@ -28,9 +31,12 @@ CLOSED: [2024-10-02 Wed 18:33]
 **** TODO [#C] Opens on same click if released over button [Cant really do without own UI system]
 
 ** Systems
-*** DOING Revamp Goods system, no more infinite stockpile | Abundance - Deficit
-*** TODO Trade system
-*** TODO Probability table based AI
+*** DONE Revamp Goods system, no more infinite stockpile | Abundance - Deficit
+CLOSED: [2024-10-08 Tue 17:40]
+*** DONE Trade system
+CLOSED: [2024-10-08 Tue 17:40]
+*** DONE Probability table based AI
+CLOSED: [2024-10-11 Fri 14:39]
 
 ** Mechanics
 *** DONE Only adjacent expansion - Influence system

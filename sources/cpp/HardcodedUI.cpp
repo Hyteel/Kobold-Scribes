@@ -241,9 +241,9 @@ void UIContext::UpdateUIContext(const GameInformation &GMInfo) //Only needs to u
   //HUD
   for (int i = 1; i < GOODSCOUNT; i++)
     {
-      std::string HudText = LOC_GOODS[i] + TFFD(GMInfo.Markets[0].Goods[i]);
+      std::string HudText = LOC_GOODS[i] + TFFD(GMInfo.Markets[0].GoodsBalance[i]);
       UIElements[2].Text[i - 1] = HudText;
-      UIElements[2].Text[i - 1 + 7] = TFFD(GMInfo.Markets[0].GoodsChange[i]);
+      UIElements[2].Text[i - 1 + 7] = TFFD(GMInfo.Markets[0].GoodsBalanceTraded[i]);
     }
 
   std::string HudMoney = "Money: " + TFFD(GMInfo.Markets[0].Money);

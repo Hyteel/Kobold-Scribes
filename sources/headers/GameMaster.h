@@ -1,5 +1,6 @@
 #pragma once
 
+#include "AI.h"
 #include "Goods.h"
 #include "TileStructure.h"
 #include "CONSTANTS.h"
@@ -25,11 +26,14 @@ struct GameInformation {
   //
 
   Market Markets[MARKETCOUNT];
+  AIStruct AIContainers[MARKETCOUNT];
 
   void InitializeGameInfornamtion();
   void DisplayTileInformation();
   void ConductDayTick();
   void ConductWeekTick();
+
+  void ConductWeekTick2();
 };
 
 void DrawGame(GameInformation &Info);

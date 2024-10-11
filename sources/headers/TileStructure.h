@@ -5,12 +5,12 @@
 #include "Buildings.h"
 
 enum TileType {
-  Debug = 0,
+  Debug = 0, //*-CHECKOUT-*
   Forest = 1,
   Field = 2,
   Mountain = 3,
   City = 4,
-  Selected = 5,
+  Selected = 5, //Deprecated? *-CHECKOUT-*
 };
 
 constexpr bool ALLOWED_BUILDINGS_PER_TILETYPE[] = {
@@ -28,8 +28,10 @@ struct GameTileGeneric {
   Market *Owner = nullptr;
 
   int Value = 0;
+  int EmptyBuildSlots = 4;
 
   Vector2 Position = {};
+  Vector2 PositionSmall = {};
 
   BuildingType Buildings[BUILDINGSLOTS] = {NoBuildingType, NoBuildingType, NoBuildingType, NoBuildingType};
 

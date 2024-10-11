@@ -1,0 +1,26 @@
+#+TITLE: TODOS 2
+#+TITLE: A Version-Control Adaptation
+
+* Meta
+Empty project that will get filled out after planning
+
+* Main
+** Documentation
+
+
+** UI
+
+
+** Systems
+
+
+** Mechanics
+
+
+** Bugs
+
+
+
+** Low Prio - WLTD
+*** TODO Write Bug Database file / system
+*** TODO Fix consistent code writing standard 

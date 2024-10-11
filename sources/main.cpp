@@ -96,7 +96,7 @@ int main(void)
 
         std::cout << "WeekTick" << "\n";
 
-        GameInformationMain.ConductWeekTick();
+        GameInformationMain.ConductWeekTick2();
       }
 
 
