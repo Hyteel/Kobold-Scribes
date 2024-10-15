@@ -10,6 +10,8 @@
 struct InputInformation {
   GameTileGeneric* CurrentTile = nullptr;
   int CurrentSelectedBuildingSlot = 0;
+  int CurrentPopUp = 0;
+  int CurrentWinner = 0;
 };
 
 
@@ -19,6 +21,8 @@ struct GameInformation {
   InputInformation _InputInformation;
 
   bool EndGame = false;
+  bool IsPaused = true;
+  bool HasPlacedFirstTile = false;
 
   //Iteration 1 of date system
   int DayCounter = 0;
@@ -36,6 +40,6 @@ struct GameInformation {
   void ConductWeekTick2();
 };
 
-void DrawGame(GameInformation &Info);
+void DrawGame(GameInformation &Info, std::array<Texture2D, 15>& GameTextures);
 void HandleInputs(GameInformation *Info, Camera2D *Camera, const UIInput &_UIInput);
 

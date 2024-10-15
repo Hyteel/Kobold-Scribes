@@ -19,7 +19,8 @@ enum UIInput {
   Building_Slot5,
   Building_Slot6,
   Building_Slot7,
-  Building_Slot8
+  Building_Slot8,
+  PopUp_Exit,
 };
 
 

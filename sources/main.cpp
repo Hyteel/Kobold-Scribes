@@ -44,6 +44,27 @@ int main(void)
   MainCamera.rotation = 0.0f;
   MainCamera.zoom = 1.0f;
 
+  std::string Path = GetApplicationDirectory();
+  std::cout << Path << "\n";
+
+  std::array<Texture2D, 15> GameTextures  = {
+    LoadTexture((Path + "../assets/Images/Uncolonized_Forest.png").c_str()),
+    LoadTexture((Path + "../assets/Images/Colonized_Forest.png").c_str()),
+    LoadTexture((Path + "../assets/Images/Uncolonized_Plains.png").c_str()),
+    LoadTexture((Path + "../assets/Images/Colonized_Plains.png").c_str()),
+    LoadTexture((Path + "../assets/Images/Uncolonized_Mountain.png").c_str()),
+    LoadTexture((Path + "../assets/Images/Colonized_Mountain.png").c_str()),
+    LoadTexture((Path + "../assets/Images/Uncolonized_City.png").c_str()),
+    LoadTexture((Path + "../assets/Images/Colonized_City.png").c_str()),
+    LoadTexture((Path + "../assets/Images/Lumbermill.png").c_str()),
+    LoadTexture((Path + "../assets/Images/Mine.png").c_str()),
+    LoadTexture((Path + "../assets/Images/Manufactory.png").c_str()),
+    LoadTexture((Path + "../assets/Images/Basic_Residences.png").c_str()),
+    LoadTexture((Path + "../assets/Images/Medium_Residences.png").c_str()),
+    LoadTexture((Path + "../assets/Images/Luxury_Residences.png").c_str()),
+    LoadTexture((Path + "../assets/Images/Luxury_Residences.png").c_str()),
+  };
+
 
   SetTargetFPS(FPS); // Set our game to run at 60 frames-per-second
   //--------------------------------------------------------------------------------------
@@ -60,6 +81,8 @@ int main(void)
 
   std::cout << "Initialization done" << "\n";
 
+  GameInformationMain._UIContext.UIElementDisplayTrigger[3] = true;
+
   // Main game loop
   while ((!WindowShouldClose()) && (!GameInformationMain.EndGame)) // Detect window close button or ESC key
   {
@@ -67,39 +90,36 @@ int main(void)
     //----------------------------------------------------------------------------------
 
     //Every Frame
-
-    //std::cout << "FrameTick" << "\n";
-
-    TickCounter++;
     GameInformationMain._UIContext.UpdateUIContext(GameInformationMain); //Only needs to update on UI input, low prio performance gain, keep for now
 
-    // std::cout << "FrameTick Done" << "\n";
+    if (!GameInformationMain.IsPaused)
+    {
+      TickCounter++;
+
+      //Every Day (Tick)
+      if (TickCounter == TICKRATE)
+        {
+          GameInformationMain.DayCounter++;
+          TickCounter = 0;
+
+          std::cout << "DayTick" << "\n";
+
+          GameInformationMain.ConductDayTick();
+        }
 
 
-    //Every Day (Tick)
-    if (TickCounter == TICKRATE)
-      {
-        GameInformationMain.DayCounter++;
-        TickCounter = 0;
+      //Every Week
+      if (GameInformationMain.DayCounter == 7)
+        {
+          GameInformationMain.DayCounter = 0;
+          GameInformationMain.WeekCounter++;
 
-        std::cout << "DayTick" << "\n";
+          std::cout << "WeekTick" << "\n";
 
-        GameInformationMain.ConductDayTick();
-      }
+          GameInformationMain.ConductWeekTick2();
+        }
 
-
-    //Every Week
-    if (GameInformationMain.DayCounter == 7)
-      {
-        GameInformationMain.DayCounter = 0;
-        GameInformationMain.WeekCounter++;
-
-        std::cout << "WeekTick" << "\n";
-
-        GameInformationMain.ConductWeekTick2();
-      }
-
-
+    }
     // Draw
     //----------------------------------------------------------------------------------
 
@@ -112,7 +132,7 @@ int main(void)
 
     BeginMode2D(MainCamera);
 
-    DrawGame(GameInformationMain);
+    DrawGame(GameInformationMain, GameTextures);
 
     EndMode2D();
 

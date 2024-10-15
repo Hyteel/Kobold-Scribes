@@ -1,0 +1,23 @@
+#+TITLE: POC-CRITERIA
+
+* DONE Bugs
+CLOSED: [2024-10-15 Tue 12:29]
+** DONE AI crashes the game sometimes
+CLOSED: [2024-10-15 Tue 12:29]
+** DONE Trade can sometimes lead to negative influence/money gain - Tied to efficiency (probably)
+CLOSED: [2024-10-15 Tue 12:29]
+
+* DONE Pause
+CLOSED: [2024-10-15 Tue 12:37]
+
+* DONE UI Elements
+CLOSED: [2024-10-15 Tue 13:39]
+** DONE Initalization
+CLOSED: [2024-10-15 Tue 13:39]
+*** DONE Place city UI element
+CLOSED: [2024-10-15 Tue 13:39]
+*** DONE Expand city - Place city for first tile
+CLOSED: [2024-10-15 Tue 13:39]
+** Trade popup -- Not necessary, not going to be implemented
+** DONE Victory popup
+CLOSED: [2024-10-15 Tue 13:39]

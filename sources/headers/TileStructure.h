@@ -35,5 +35,5 @@ struct GameTileGeneric {
 
   BuildingType Buildings[BUILDINGSLOTS] = {NoBuildingType, NoBuildingType, NoBuildingType, NoBuildingType};
 
-  void DrawTile(int Special);
+  void DrawTile(int Special, std::array<Texture2D, 15>& GameTextures);
 };

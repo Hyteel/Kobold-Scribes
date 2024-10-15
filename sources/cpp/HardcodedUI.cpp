@@ -178,6 +178,38 @@ void UIContext::InitializeUIContext(const GameInformation &GMInfo) {
 
 
   UIElements.push_back(HUD);
+
+  //PopUp
+  UIElement PopUpUI;
+
+  PopUpUI.Bounds = (Rectangle){(SCREENWIDTH/2.f) - 200, (SCREENHEIGHT/2.f) - 100, 250, 100};
+
+
+  PopUpUI.DisplayText = "TILE-UI";
+
+  PopUpUI.Buttons = {
+    (Rectangle){(SCREENWIDTH / 2.f), (SCREENHEIGHT / 2.f) - 50, 50, 50}
+  };
+
+  PopUpUI.ButtonText = {
+    "Close",
+  };
+
+  PopUpUI.ButtonResponse = {
+    PopUp_Exit,
+  };
+
+  PopUpUI.TextFields = {
+    (Rectangle){(SCREENWIDTH / 2.f) - 180, (SCREENHEIGHT / 2.f) - 90, 175, 100},
+  };
+
+
+   PopUpUI.Text = {
+     "0"
+   };
+
+
+  UIElements.push_back(PopUpUI);
   //-------------------------------------------
   for (int i = 0; i < UIElements.size(); i++)
     {
@@ -191,6 +223,15 @@ void UIContext::UpdateUIContext(const GameInformation &GMInfo) //Only needs to u
   //TileUI
   if (GMInfo._InputInformation.CurrentTile != nullptr)
     {
+      if (!GMInfo.HasPlacedFirstTile)
+        {
+          UIElements[0].ButtonText[4] = "Place City";
+        }
+      else
+        {
+          UIElements[0].ButtonText[4] = "Expand";
+        }
+
       for (int i = 0; i < UIElements[0].ButtonText.size() - 1; i++)
         {
           UIElements[0].ButtonText[i] = LOC_BUILDINGS[GMInfo._InputInformation.CurrentTile->Buildings[i]];
@@ -237,13 +278,18 @@ void UIContext::UpdateUIContext(const GameInformation &GMInfo) //Only needs to u
       if (CheckCollisionPointRec(GetMousePosition(), CurrentRec)) {UIElements[1].Text[0] = LOC_BUILDINGDESCRIPTION[i + 1]; }
     }
 
+  if (CheckCollisionPointRec(GetMousePosition(), (Rectangle){0.f + 240.f, (SCREENHEIGHT/4.f) + 30.f, 50.f, 50.f}))
+    {
+      UIElements[1].Text[0] = LOC_BUILDINGDESCRIPTION[8];
+    }
+
 
   //HUD
   for (int i = 1; i < GOODSCOUNT; i++)
     {
       std::string HudText = LOC_GOODS[i] + TFFD(GMInfo.Markets[0].GoodsBalance[i]);
       UIElements[2].Text[i - 1] = HudText;
-      UIElements[2].Text[i - 1 + 7] = TFFD(GMInfo.Markets[0].GoodsBalanceTraded[i]);
+      UIElements[2].Text[i - 1 + 7] = "Traded: " + TFFD(GMInfo.Markets[0].GoodsBalanceTraded[i]);
     }
 
   std::string HudMoney = "Money: " + TFFD(GMInfo.Markets[0].Money);
@@ -257,5 +303,26 @@ void UIContext::UpdateUIContext(const GameInformation &GMInfo) //Only needs to u
 
   UIElements[2].Text[11] = TFFD(GMInfo.Markets[0].MoneyChange);
   UIElements[2].Text[12] = TFFD(GMInfo.Markets[0].InfluenceChange);
+
+
+  //PopUp
+  if (GMInfo._InputInformation.CurrentPopUp == 0)
+    {
+      UIElements[3].Text[0] = "Select a city starting location \n Space to Pause/Unpause";
+    }
+  else if (GMInfo._InputInformation.CurrentPopUp == 1)
+    {
+      if (GMInfo._InputInformation.CurrentWinner == 0)
+        {
+          UIElements[3].Text[0] = "You Won!";
+        }
+      else
+        {
+          UIElements[3].Text[0] = "You lost, market that won: " + TFFD(GMInfo._InputInformation.CurrentWinner);
+        }
+    }
+
+
+
 }
 

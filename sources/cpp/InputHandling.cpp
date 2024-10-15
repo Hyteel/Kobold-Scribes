@@ -40,7 +40,9 @@ void HandleInputs(GameInformation *Info, Camera2D *Camera, const UIInput &_UIInp
   Camera->zoom = std::clamp(Camera->zoom + (GetMouseWheelMove()*0.1f), 1.f, 10.f);
   Camera->target = (Vector2) {Camera->target.x + -1.f*Camera->zoom*(IsKeyDown(KEY_A) - IsKeyDown(KEY_D)), Camera->target.y + -1.f*Camera->zoom*(IsKeyDown(KEY_W) - IsKeyDown(KEY_S))};
 
-  if (IsKeyPressed(KEY_Q)) { Info->_UIContext.UIElementDisplayTrigger[0] = false; Info->_UIContext.UIElementDisplayTrigger[1] = false;}
+  if (IsKeyPressed(KEY_Q)) { Info->_UIContext.UIElementDisplayTrigger[0] = false; Info->_UIContext.UIElementDisplayTrigger[1] = false; Info->_UIContext.UIElementDisplayTrigger[3] = false;}
+
+  if (IsKeyPressed(KEY_SPACE)) {Info->IsPaused = Info->IsPaused ? false : true;}
   //if (IsKeyPressed(KEY_E)) { Info->Markets[0].MarketTiles.push_back(Info->_InputInformation.CurrentTile);}
 
   //UI Input
@@ -84,6 +86,7 @@ void HandleInputs(GameInformation *Info, Camera2D *Camera, const UIInput &_UIInp
         Info->Markets[0].Influence -= INFLUENCEEXPANSIONCOST;
         Info->_InputInformation.CurrentTile->Owner = &Info->Markets[0];
         Info->Markets[0].MarketTiles.push_back(Info->_InputInformation.CurrentTile);
+        Info->HasPlacedFirstTile = true;
 
         break;
       }
@@ -121,9 +124,22 @@ void HandleInputs(GameInformation *Info, Camera2D *Camera, const UIInput &_UIInp
       {
         if (Info->Markets[0].Money < WINCONMONEYCOST) {break;}
         std::cout << "YOU WON";
-        Info->EndGame = true;
+        Info->_UIContext.UIElementDisplayTrigger[3] = true;
+        Info->_InputInformation.CurrentWinner = 0;
+        Info->IsPaused = true;
+        Info->_InputInformation.CurrentPopUp = 1;
+
+        //Info->EndGame = true;
         break;
       }
+
+
+    case PopUp_Exit:
+      {
+        Info->_UIContext.UIElementDisplayTrigger[3] = false;
+        break;
+      }
+
 
     default:
       {break;}

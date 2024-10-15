@@ -200,8 +200,13 @@ void AI_Build(GameInformation *BU_GMInfo, Market *BU_AIMarket, AIStruct* BU_AIPo
 
   if (SelectedBuilding->Type == WinConBuilding) //If AI just built final building then they won
     {
-      std::cout << "AI WON, MARKET: " << BU_AIMarket->IndexID;
-      BU_GMInfo->EndGame = true;
+      std::cout << "AI WON, MARKET: " << BU_AIMarket->IndexID << "\n";
+      BU_GMInfo->_UIContext.UIElementDisplayTrigger[3] = true;
+      BU_GMInfo->_InputInformation.CurrentWinner = BU_AIMarket->IndexID;
+      BU_GMInfo->_InputInformation.CurrentPopUp = 1;
+      BU_GMInfo->IsPaused = true;
+
+      //BU_GMInfo->EndGame = true;
     }
 
   ChosenTile->EmptyBuildSlots--;

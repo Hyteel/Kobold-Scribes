@@ -138,7 +138,7 @@ const Building CBWinCon
     std::vector<float>{},
     0.f,
     0.f,
-    500.f
+    3000.f
   };
 
 

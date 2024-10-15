@@ -13,16 +13,15 @@ constexpr int SCREENWIDTH = 1280; //TILESIZE*MAPTILEWIDTH;
 constexpr int SCREENHEIGHT = 720; //TILESIZE*MAPTILEHEIGHT;
 
 constexpr int FPS = 60;
-constexpr int TICKRATE = 20;
+constexpr int TICKRATE = 40;
 constexpr int MARKETCOUNT = 8;
 
 
 constexpr float INFLUENCEEXPANSIONCOST = 25.f;
 constexpr float PASSIVEMONEYINCOME = 1.f;
-constexpr float WINCONMONEYCOST = 500.f;
+constexpr float WINCONMONEYCOST = 3000.f;
 
 constexpr int BUILDINGSLOTS = 4;
-
 
 constexpr Color TILECOLORS[6] =
 {
@@ -42,4 +41,6 @@ constexpr Color MARKETCOLORS[MARKETCOUNT] =
     CLITERAL(Color) {130 - 30, 130 - 30, 130 - 30, 255}, //GRAY
     CLITERAL(Color) {127 - 30, 106 - 30, 79 - 30, 255}, //BROWN
     CLITERAL(Color) {225 - 30, 225 - 30, 225 - 30, 255}, //WHITE
+    PURPLE,
+    RED
   };

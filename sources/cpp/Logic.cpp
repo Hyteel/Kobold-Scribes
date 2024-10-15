@@ -32,7 +32,7 @@ void GameInformation::InitializeGameInfornamtion()
 
   LOC_BUILDINGDESCRIPTION.push_back("DEBUG");
 
-  for (int i = 1; i < 8; i++)
+  for (int i = 1; i < 9; i++)
     {
       LOC_BUILDINGDESCRIPTION.push_back(GenerateBuildingDescription(i));
     }
@@ -127,7 +127,14 @@ void GameInformation::ConductWeekTick2()
 
       for (int ig = 1; ig < GOODSCOUNT; ig++)
         {
-          Markets[i].GoodsEfficiency[ig] = ((Markets[i].GoodsBalance[ig] + Markets[i].GoodsBalanceTraded[ig]) * GOODSEFFICIENCY[ig]) / 100.f;
+          if (Markets[i].GoodsBalanceTraded[ig] > 0)
+            {
+              Markets[i].GoodsEfficiency[ig] = ((Markets[i].GoodsBalance[ig] + Markets[i].GoodsBalanceTraded[ig]) * GOODSEFFICIENCY[ig]) / 100.f;
+            }
+          else
+            {
+              Markets[i].GoodsEfficiency[ig] = Markets[i].GoodsBalance[ig] / 100.f;
+            }
         }
 
       Markets[i].GoodsBalance = ZEROBALANCE;
@@ -194,10 +201,10 @@ void GameInformation::ConductWeekTick2()
                   CurrentConsumptionPair->first->GoodsBalanceTraded[i] = CurrentConsumptionPair->second + CurrentProductionPair->second;
                   CurrentProductionPair->first->GoodsBalanceTraded[i] = 0.f;
 
-                  CurrentProductionPair->first->Influence += TRADEDGOODSINFLUENCE[i] * CurrentConsumptionPair->second * 1.f;
-                  CurrentProductionPair->first->InfluenceChange += TRADEDGOODSINFLUENCE[i] * CurrentConsumptionPair->second * 1.f;
-                  CurrentProductionPair->first->Money += TRADEDGOODSINFLUENCE[i] * CurrentConsumptionPair->second * 1.f;
-                  CurrentProductionPair->first->MoneyChange += TRADEDGOODSINFLUENCE[i] * CurrentConsumptionPair->second * 1.f;
+                  CurrentProductionPair->first->Influence += TRADEDGOODSINFLUENCE[i] * CurrentConsumptionPair->second * -1.f;
+                  CurrentProductionPair->first->InfluenceChange += TRADEDGOODSINFLUENCE[i] * CurrentConsumptionPair->second * -1.f;
+                  CurrentProductionPair->first->Money += TRADEDGOODSINFLUENCE[i] * CurrentConsumptionPair->second * -1.f;
+                  CurrentProductionPair->first->MoneyChange += TRADEDGOODSINFLUENCE[i] * CurrentConsumptionPair->second * -1.f;
 
                   CurrentProductionPair->second = 0;
                 }
