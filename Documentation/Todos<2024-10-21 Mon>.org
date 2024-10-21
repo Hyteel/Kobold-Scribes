@@ -1,0 +1,60 @@
+#+TITLE: TODOS <2024-10-21 Mon>
+#+TITLE: A Daily Version-Control Adaptation of Documentation and Planning
+
+* Meta
+Empty project that will get filled out after planning
+
+* Main
+** Documentation
+*** DONE Start using "Daily todos"
+CLOSED: [2024-10-21 Mon 11:28]
+*** TODO Write Systems Documentation
+*** DONE Write next day tasks
+CLOSED: [2024-10-21 Mon 16:24]
+
+** UI
+*** TODO Capital Tiletype
+**** TODO 8 Buildslots
+*** TODO Display Population & Population Growth
+
+** General
+*** DONE General Cleanup of old code and systems
+CLOSED: [2024-10-21 Mon 16:25]
+
+** Systems
+*** DONE Pops Implementation
+CLOSED: [2024-10-21 Mon 16:24]
+**** DONE Tile populations & Growth
+CLOSED: [2024-10-21 Mon 16:24]
+**** DONE Dynamic building-slots
+CLOSED: [2024-10-21 Mon 16:24]
+*** -DOING- Tile adjacency bonuses
+*** TODO Influence & Expansion rework
+**** TODO Population Loss on expansion
+*** TODO Trade system prep
+**** TODO Travel Cost
+**** TODO Capital Designation
+*** -DOING- Rework Input system
+
+
+** Mechanics
+*** DONE Building Economic Output //Already have it, influence-generation
+CLOSED: [2024-10-21 Mon 12:03]
+
+
+** Bugs
+*** TODO Fix ANY bugs generated during the course of this day
+
+** Content
+*** TODO Roads - Boosts production in adjacent tiles
+
+** Low Prio - WLTD
+*** TODO Clean up Deprecated code, standard indexing / remove debug indicies
+*** TODO Get rid of old code (2s)
+
+
+* Log
+
+I was very suprised at the sheer amount of stuff I needed to change to implement the most basic of edits,
+but it does feel very satisfying to clean up the project. I did not take good care of it just to speed through to the POC,
+so now it feels like cleaning a very dirty room. With results to show for it, if I keep doing this the dread I feel when opening old files will be a thing of the past

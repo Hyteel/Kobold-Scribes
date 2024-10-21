@@ -21,7 +21,13 @@ constexpr float INFLUENCEEXPANSIONCOST = 25.f;
 constexpr float PASSIVEMONEYINCOME = 1.f;
 constexpr float WINCONMONEYCOST = 3000.f;
 
-constexpr int BUILDINGSLOTS = 4;
+constexpr int BUILDINGSLOTS = 4; //X-CHECKOUT-X
+constexpr int MAXTILEBUILDINGSLOTS = 8;
+constexpr int STARTINGTILEBUILDSLOTS = 1;
+constexpr float POPULATIONNEWHOUSEBREAKPOINT = 50.f;
+constexpr float BASEPOPULATIONGROWTHMODIFIER = 1.f;
+constexpr float POPULATIONINFLUENCEGENERATION = 1.f;
+constexpr int PLAYERMARKETINDEX = 0;
 
 constexpr Color TILECOLORS[6] =
 {

@@ -22,7 +22,7 @@ struct Building {
   std::vector<float> InputAmount;
   std::vector<float> OutputAmount;
 
-  float InfluenceGeneration;
+  float InfluenceGeneration; //Rename to popgeneration X-CHECKOUT-X
   float MoneyGeneration;
 
   float MoneyCost;

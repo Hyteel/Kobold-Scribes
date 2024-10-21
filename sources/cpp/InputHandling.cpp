@@ -66,7 +66,9 @@ void HandleInputs(GameInformation *Info, Camera2D *Camera, const UIInput &_UIInp
     case Tile_Slot5:
       {
         if (Info->_InputInformation.CurrentTile->Owner != nullptr) {break;}
-        if (Info->Markets[0].Influence < INFLUENCEEXPANSIONCOST) {break;}
+        //if (Info->Markets[0].Influence < INFLUENCEEXPANSIONCOST) {break;}
+        if (Info->_InputInformation.CurrentTile->MarketInfluences[PLAYERMARKETINDEX] < INFLUENCEEXPANSIONCOST) {break;}
+
         if (&Info->Markets[0] == Info->_InputInformation.CurrentTile->Owner) {break;} //already owned by player
 
         //Is the tile neighbouring another tile?
@@ -83,10 +85,16 @@ void HandleInputs(GameInformation *Info, Camera2D *Camera, const UIInput &_UIInp
             if (HasFoundNeighbour == false) {break;}
           }
 
-        Info->Markets[0].Influence -= INFLUENCEEXPANSIONCOST;
+        //Info->Markets[0].Influence -= INFLUENCEEXPANSIONCOST; X-CHECKOUT-X INFLUENCE IS DEPRECATED
+
+        if (!Info->HasPlacedFirstTile)
+          {
+            Info->_InputInformation.CurrentTile->IsCapital = true;
+            Info->HasPlacedFirstTile = true;
+          }
+
         Info->_InputInformation.CurrentTile->Owner = &Info->Markets[0];
         Info->Markets[0].MarketTiles.push_back(Info->_InputInformation.CurrentTile);
-        Info->HasPlacedFirstTile = true;
 
         break;
       }
@@ -104,13 +112,18 @@ void HandleInputs(GameInformation *Info, Camera2D *Camera, const UIInput &_UIInp
         {
           int Index = Iterator - Info->Markets[0].MarketTiles.begin();
           BuildingType BType = static_cast<BuildingType>(_UIInput - 6);
+          Market* PlayerMarket = &Info->Markets[PLAYERMARKETINDEX];
+          GameTileGeneric* CurrentTile = PlayerMarket->MarketTiles[Index];
+
+          if (PlayerMarket->MarketTiles[Index]->UnlockedBuildSlots < MAXTILEBUILDINGSLOTS - CurrentTile->EmptyBuildSlots) {break;} //Not enough unlocked tiles yet X-CHECKOUT-X VISUALIZE
 
           if (Info->Markets[0].Money < CBBUILDINGS[BType]->MoneyCost) {break;}
 
-          if (!ALLOWED_BUILDINGS_PER_TILETYPE[BType + (8 * static_cast<int>(Info->_InputInformation.CurrentTile->Type))]) {break;}
+          if (!ALLOWED_BUILDINGS_PER_TILETYPE[BType + (8 * static_cast<int>(Info->_InputInformation.CurrentTile->Type))]) {break;} //What the hell is this X-CHECKOUT-X
 
-          Info->Markets[0].Money -= CBBUILDINGS[BType]->MoneyCost;
-          Info->Markets[0].MarketTiles[Index]->Buildings[Info->_InputInformation.CurrentSelectedBuildingSlot] = BType;
+          PlayerMarket->Money -= CBBUILDINGS[BType]->MoneyCost;
+          CurrentTile->Buildings[Info->_InputInformation.CurrentSelectedBuildingSlot] = BType;
+          CurrentTile->EmptyBuildSlots--;
         }
       else
         {

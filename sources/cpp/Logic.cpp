@@ -14,16 +14,16 @@ std::vector<std::string> LOC_BUILDINGDESCRIPTION;
 void GameInformation::InitializeGameInfornamtion()
 {
   for (int iw = 0; iw < MAPTILEWIDTH; iw++)
-            {
-              for (int ih = 0; ih < MAPTILEHEIGHT; ih++)
-                {
-                  GameTileGeneric* CurrentTile = &Tiles[iw][ih];
-                  CurrentTile->ID = ih + iw*MAPTILEHEIGHT;
-                  CurrentTile->Type = TileType(GetRandomValue(1, 4));
-                  CurrentTile->Position = Vector2{static_cast<float>(iw)*TILESIZEF, static_cast<float>(ih)*TILESIZEF};
-                  CurrentTile->PositionSmall = Vector2{(float) iw,(float) ih};
-                }
-            }
+    {
+      for (int ih = 0; ih < MAPTILEHEIGHT; ih++)
+        {
+          GameTileGeneric* CurrentTile = &Tiles[iw][ih];
+          CurrentTile->ID = ih + iw*MAPTILEHEIGHT;
+          CurrentTile->Type = TileType(GetRandomValue(1, 4));
+          CurrentTile->Position = Vector2{static_cast<float>(iw)*TILESIZEF, static_cast<float>(ih)*TILESIZEF};
+          CurrentTile->PositionSmall = Vector2{(float) iw,(float) ih};
+        }
+    }
 
   for (int i = 0; i < MARKETCOUNT; i++)
     {
@@ -39,40 +39,16 @@ void GameInformation::InitializeGameInfornamtion()
 }
 
 
-void GameInformation::DisplayTileInformation()
-{
-  for (int iw = 0; iw < MAPTILEWIDTH; iw++)
-    {
-      for (int ih = 0; ih < MAPTILEHEIGHT; ih++)
-        {
-          std::cout << "Tile: " << iw << " | " << ih << " || ID: " << Tiles[iw][ih].ID << "\n"; 
-        }
-    }
-}
-
-
-void Market::ConductMarketLogic()
-{
-  if (DEBUGMODE) {  std::cout << "ConductMarketLogic - Start" << "\n";}
-
-  for (int i = 0; i < MarketTiles.size(); i++)
-    {
-      for (int i2 = 0; i2 < BUILDINGSLOTS; i2++)
-        {
-          CBBUILDINGS[MarketTiles[i]->Buildings[i2]]->BuildingTick(this); 
-        }
-    }
-
-  if (DEBUGMODE) {  std::cout << "ConductMarketLogic - End" << "\n";}
-}
-
-void Market::ConductMarketLogic2()
+void Market::ConductMarketLogic2(GameInformation* CM_Info)
 {
   if (DEBUGMODE) {  std::cout << "ConductMarketLogic2 - Start" << "\n";}
 
   for (int i = 0; i < MarketTiles.size(); i++)
     {
-      for (int i2 = 0; i2 < BUILDINGSLOTS; i2++)
+      MarketTiles[i]->UpdatePopulation();
+      MarketTiles[i]->SpreadInfluence(CM_Info);
+
+      for (int i2 = 0; i2 < MAXTILEBUILDINGSLOTS; i2++)
         {
           if (DEBUGMODE) {  std::cout << "CM2 Building : " << i << " | " << i2 << " | " << CBBUILDINGS[MarketTiles[i]->ID] << "\n";}
 
@@ -92,27 +68,6 @@ void GameInformation::ConductDayTick()
           Markets[i].Money += PASSIVEMONEYINCOME;
         }
     }
-
-
-void GameInformation::ConductWeekTick()
-  {
-    if (DEBUGMODE) {  std::cout << "ConductWeekTick - Start" << "\n";}
-
-    for (int i = 0; i < MARKETCOUNT; i++)
-      {
-        Markets[i].InfluenceChange = 0;
-        Markets[i].MoneyChange = PASSIVEMONEYINCOME * 7;
-        for (int ia = 0; ia < GOODSCOUNT; ia++) {Markets[i].GoodsChange[ia] = 0;}
-
-
-        Markets[i].ConductMarketLogic();
-
-
-        if (i != 0) {ConductAILogic(this, &Markets[i]);}
-      }
-
-    if (DEBUGMODE) {  std::cout << "ConductWeekTick - End" << "\n";}
-  }
 
 
 void GameInformation::ConductWeekTick2()
@@ -140,7 +95,7 @@ void GameInformation::ConductWeekTick2()
       Markets[i].GoodsBalance = ZEROBALANCE;
       Markets[i].GoodsBalanceTraded = ZEROBALANCE;
 
-      Markets[i].ConductMarketLogic2();
+      Markets[i].ConductMarketLogic2(this);
     }
 
 

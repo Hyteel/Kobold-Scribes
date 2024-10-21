@@ -1,8 +1,10 @@
 #pragma once
+#include "CONSTANTS.h"
 #include "vector"
 #include <array>
 
 struct GameTileGeneric; //Forward declaration
+struct GameInformation; //Forward Declaratation
 
 enum GoodsType {
   NoGoodsType = 0,
@@ -30,15 +32,16 @@ constexpr std::array<float, GOODSCOUNT> TRADEDGOODSINFLUENCE = { //How much mone
   0.0f, 1.f, 2.f, 1.f, 5.f
 };
 
-struct Market {
+struct Market { //X-CHECKOUT-X Split this from goods into a seperate file
   int IndexID = 0.f;
   float Money = 50.f;
   float Influence = 50.f;
 
   float MoneyChange = 0.f;
   float InfluenceChange = 0.f;
+  float PopulationGrowthModifer = BASEPOPULATIONGROWTHMODIFIER;
 
-  float Goods[GOODSCOUNT] = {0.f,0.f,0.f,0.f,0.f}; //Old
+  float Goods[GOODSCOUNT] = {0.f,0.f,0.f,0.f,0.f}; //Old X-CHECKOUT-X
   float GoodsChange[GOODSCOUNT] = {0.f, 0.f, 0.f, 0.f, 0.f}; //Old
 
   std::array<float, GOODSCOUNT> GoodsBalance = ZEROBALANCE;
@@ -47,7 +50,6 @@ struct Market {
 
   std::vector<GameTileGeneric*> MarketTiles;
 
-  void ConductMarketLogic();
-  void ConductMarketLogic2();
+  void ConductMarketLogic2(GameInformation* CM_Info);
   void CalculateGoodsEfficiency();
 };

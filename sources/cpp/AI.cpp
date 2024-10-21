@@ -116,7 +116,7 @@ void AI_Expansion(GameInformation* AE_GMInfo, AIStruct* AE_AIPointer, const AIFo
 
   std::multimap<TileType, GameTileGeneric*>* TileKnowledgePointer = &AE_AIPointer->AITileKnowledge;
 
-  if (AE_AIMarket->Influence < INFLUENCEEXPANSIONCOST) {return;}
+  //if (AE_AIMarket->Influence < INFLUENCEEXPANSIONCOST) {return;}
 
   //Expansion
   //If this is the first time, do the first time expansion
@@ -126,6 +126,7 @@ void AI_Expansion(GameInformation* AE_GMInfo, AIStruct* AE_AIPointer, const AIFo
 
       AI_ExpandTile(AE_GMInfo, RandomTile, AE_AIMarket, TileKnowledgePointer, AE_AIPointer);
 
+      RandomTile->IsCapital = true;
       return;
     }
 
@@ -141,7 +142,7 @@ void AI_Expansion(GameInformation* AE_GMInfo, AIStruct* AE_AIPointer, const AIFo
       continue;
       }
 
-    it++; 
+    it++;
     }
 
 
@@ -162,6 +163,10 @@ void AI_Expansion(GameInformation* AE_GMInfo, AIStruct* AE_AIPointer, const AIFo
 
   std::advance(Range.first, GetRandomValue(0, std::distance(Range.first, Range.second) - 1));
   GameTileGeneric* ChosenTile = Range.first->second;
+
+  //X-CHECKOUT-X Can be made more extensive, IE. check every tile if it can expand, probably best incorporated into an action point system
+  if (ChosenTile->MarketInfluences[AE_AIMarket->IndexID] < INFLUENCEEXPANSIONCOST) {return;} //Not enough resources to expand
+
   AI_ExpandTile(AE_GMInfo, ChosenTile, AE_AIMarket, TileKnowledgePointer, AE_AIPointer);
 
   TileKnowledgePointer->erase(Range.first);
@@ -195,7 +200,9 @@ void AI_Build(GameInformation *BU_GMInfo, Market *BU_AIMarket, AIStruct* BU_AIPo
   std::advance(Range.first, GetRandomValue(0, std::distance(Range.first, Range.second) - 1));
   GameTileGeneric* ChosenTile = Range.first->second; //[3]
 
-  ChosenTile->Buildings[4 - ChosenTile->EmptyBuildSlots] = SelectedBuilding->Type;
+  if (ChosenTile->UnlockedBuildSlots < MAXTILEBUILDINGSLOTS - ChosenTile->EmptyBuildSlots) {return;} //Buildslot not unlocked
+
+  ChosenTile->Buildings[MAXTILEBUILDINGSLOTS - ChosenTile->EmptyBuildSlots] = SelectedBuilding->Type;
   BU_AIMarket->Money -= SelectedBuilding->MoneyCost; //[4]
 
   if (SelectedBuilding->Type == WinConBuilding) //If AI just built final building then they won

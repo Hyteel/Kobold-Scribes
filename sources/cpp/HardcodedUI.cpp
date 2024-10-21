@@ -22,7 +22,7 @@ void UIContext::InitializeUIContext(const GameInformation &GMInfo) {
   //Tile UI
   UIElement TileUI;
 
-  TileUI.Bounds = (Rectangle){(SCREENWIDTH/2.f) - 200, (SCREENHEIGHT/2.f) - 100, 250, 100};
+  TileUI.Bounds = (Rectangle){(SCREENWIDTH/2.f) - 200, (SCREENHEIGHT/2.f) - 100, 250, 200};
 
 
   TileUI.DisplayText = "TILE-UI";
@@ -32,10 +32,18 @@ void UIContext::InitializeUIContext(const GameInformation &GMInfo) {
     (Rectangle){(SCREENWIDTH / 2.f) - 150, (SCREENHEIGHT / 2.f) - 50, 50, 50},
     (Rectangle){(SCREENWIDTH / 2.f) - 100, (SCREENHEIGHT / 2.f) - 50, 50, 50},
     (Rectangle){(SCREENWIDTH / 2.f) - 50, (SCREENHEIGHT / 2.f) - 50, 50, 50},
+    (Rectangle){(SCREENWIDTH/2.f) - 200, (SCREENHEIGHT/2.f) + 50, 50, 50},
+    (Rectangle){(SCREENWIDTH / 2.f) - 150, (SCREENHEIGHT / 2.f) + 50, 50, 50},
+    (Rectangle){(SCREENWIDTH / 2.f) - 100, (SCREENHEIGHT / 2.f) + 50, 50, 50},
+    (Rectangle){(SCREENWIDTH / 2.f) - 50, (SCREENHEIGHT / 2.f) + 50, 50, 50},
     (Rectangle){(SCREENWIDTH / 2.f), (SCREENHEIGHT / 2.f) - 50, 50, 50}
   };
 
   TileUI.ButtonText = {
+    "SLOT1",
+    "SLOT2",
+    "SLOT3",
+    "SLOT4",
     "SLOT1",
     "SLOT2",
     "SLOT3",
@@ -45,6 +53,10 @@ void UIContext::InitializeUIContext(const GameInformation &GMInfo) {
 
   TileUI.ButtonResponse = {
     Tile_Slot1,
+    Tile_Slot2,
+    Tile_Slot3,
+    Tile_Slot4,
+    Tile_Slot1, //X-CHECKOUT-X NO NEED FOR THEM TO BE UNIQUE, revisit the input system
     Tile_Slot2,
     Tile_Slot3,
     Tile_Slot4,
@@ -225,11 +237,11 @@ void UIContext::UpdateUIContext(const GameInformation &GMInfo) //Only needs to u
     {
       if (!GMInfo.HasPlacedFirstTile)
         {
-          UIElements[0].ButtonText[4] = "Place City";
+          UIElements[0].ButtonText[8] = "Place City";
         }
       else
         {
-          UIElements[0].ButtonText[4] = "Expand";
+          UIElements[0].ButtonText[8] = "Expand";
         }
 
       for (int i = 0; i < UIElements[0].ButtonText.size() - 1; i++)

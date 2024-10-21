@@ -35,7 +35,6 @@ struct GameInformation {
   void InitializeGameInfornamtion();
   void DisplayTileInformation();
   void ConductDayTick();
-  void ConductWeekTick();
 
   void ConductWeekTick2();
 };
