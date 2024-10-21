@@ -260,7 +260,7 @@ void ConductAILogic2(GameInformation *GMInfo, Market *AIMarket)
 }
 
 
-
+//Action points
 
 
 
