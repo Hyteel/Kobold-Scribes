@@ -4,7 +4,7 @@
 #include <vector>
 #include "vector"
 
-enum UIInput {
+enum UIInput { //X-CHECKOUT-X MOVE TO SOMEWHERE ELSE
   Null,
   NonButton,
   Tile_Slot1,
@@ -12,6 +12,10 @@ enum UIInput {
   Tile_Slot3,
   Tile_Slot4,
   Tile_Slot5,
+  Tile_Slot6,
+  Tile_Slot7,
+  Tile_Slot8,
+  Tile_Slot9,
   Building_Slot1,
   Building_Slot2,
   Building_Slot3,

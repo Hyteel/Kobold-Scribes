@@ -68,6 +68,7 @@ bool AI_ExpandTile(GameInformation* ET_GMInfo, GameTileGeneric* TileToExpand, Ma
   ET_AIMarket->MarketTiles.push_back(TileToExpand);
   ET_AIMarket->Influence -= INFLUENCEEXPANSIONCOST;
   TileToExpand->Owner = ET_AIMarket;
+  ET_AIMarket->PopulationGrowthModifer *= POPULATIONGROWTHDECREASEMODIFIER;
 
   //Add tile to buildingtracker
   ET_AIPointer->AIBuildingTileKnowledge.insert({{TileToExpand->Type, TileToExpand}});

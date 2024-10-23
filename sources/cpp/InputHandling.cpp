@@ -56,6 +56,10 @@ void HandleInputs(GameInformation *Info, Camera2D *Camera, const UIInput &_UIInp
     case Tile_Slot2:
     case Tile_Slot3:
     case Tile_Slot4:
+    case Tile_Slot5:
+    case Tile_Slot6:
+    case Tile_Slot7:
+    case Tile_Slot8:
       {
       Info->_InputInformation.CurrentTile->Value += (_UIInput % 2) - 1;
       Info->_InputInformation.CurrentSelectedBuildingSlot = (_UIInput - 2);
@@ -63,29 +67,31 @@ void HandleInputs(GameInformation *Info, Camera2D *Camera, const UIInput &_UIInp
       break;
       }
 
-    case Tile_Slot5:
+    case Tile_Slot9:
       {
+        Market* PlayerMarket = &Info->Markets[PLAYERMARKETINDEX];
+
         if (Info->_InputInformation.CurrentTile->Owner != nullptr) {break;}
         //if (Info->Markets[0].Influence < INFLUENCEEXPANSIONCOST) {break;}
-        if (Info->_InputInformation.CurrentTile->MarketInfluences[PLAYERMARKETINDEX] < INFLUENCEEXPANSIONCOST) {break;}
 
-        if (&Info->Markets[0] == Info->_InputInformation.CurrentTile->Owner) {break;} //already owned by player
+        if (PlayerMarket == Info->_InputInformation.CurrentTile->Owner) {break;} //already owned by player
 
         //Is the tile neighbouring another tile?
-
-        if (Info->Markets[0].MarketTiles.size() != 0)
+        if (PlayerMarket->MarketTiles.size() != 0) //Is this NOT the first tile
           {
+            if (Info->_InputInformation.CurrentTile->MarketInfluences[PLAYERMARKETINDEX] < INFLUENCEEXPANSIONCOST) {break;}
+
             bool HasFoundNeighbour = false;
 
-            for (int i = 0; i < Info->Markets[0].MarketTiles.size(); i++)
+            for (int i = 0; i < PlayerMarket->MarketTiles.size(); i++)
               {
-                if (Vector2Distance(Info->_InputInformation.CurrentTile->Position, Info->Markets[0].MarketTiles[i]->Position) / TILESIZEF <= 1.f) {HasFoundNeighbour = true; break;}
+                if (Vector2Distance(Info->_InputInformation.CurrentTile->Position, PlayerMarket->MarketTiles[i]->Position) / TILESIZEF <= 1.f) {HasFoundNeighbour = true; break;}
               }
 
             if (HasFoundNeighbour == false) {break;}
           }
 
-        //Info->Markets[0].Influence -= INFLUENCEEXPANSIONCOST; X-CHECKOUT-X INFLUENCE IS DEPRECATED
+        //PlayerMarket.Influence -= INFLUENCEEXPANSIONCOST; X-CHECKOUT-X INFLUENCE IS DEPRECATED
 
         if (!Info->HasPlacedFirstTile)
           {
@@ -93,8 +99,9 @@ void HandleInputs(GameInformation *Info, Camera2D *Camera, const UIInput &_UIInp
             Info->HasPlacedFirstTile = true;
           }
 
-        Info->_InputInformation.CurrentTile->Owner = &Info->Markets[0];
-        Info->Markets[0].MarketTiles.push_back(Info->_InputInformation.CurrentTile);
+        Info->_InputInformation.CurrentTile->Owner = PlayerMarket;
+        PlayerMarket->MarketTiles.push_back(Info->_InputInformation.CurrentTile);
+        PlayerMarket->PopulationGrowthModifer *= POPULATIONGROWTHDECREASEMODIFIER;
 
         break;
       }
@@ -111,7 +118,7 @@ void HandleInputs(GameInformation *Info, Camera2D *Camera, const UIInput &_UIInp
       if (Iterator != Info->Markets[0].MarketTiles.end()) //Does the players market contain the currently selected tile?
         {
           int Index = Iterator - Info->Markets[0].MarketTiles.begin();
-          BuildingType BType = static_cast<BuildingType>(_UIInput - 6);
+          BuildingType BType = static_cast<BuildingType>(_UIInput - 10); //X-CHECKOUT-X REVISIT INPUT SYSTEM
           Market* PlayerMarket = &Info->Markets[PLAYERMARKETINDEX];
           GameTileGeneric* CurrentTile = PlayerMarket->MarketTiles[Index];
 
@@ -135,7 +142,7 @@ void HandleInputs(GameInformation *Info, Camera2D *Camera, const UIInput &_UIInp
 
     case Building_Slot8:
       {
-        if (Info->Markets[0].Money < WINCONMONEYCOST) {break;}
+        if (Info->Markets[0].Money < WINCONMONEYCOST) {break;} //X-CHECKOUT-X CONNECT THIS TO THE BUILDING SYSTEM
         std::cout << "YOU WON";
         Info->_UIContext.UIElementDisplayTrigger[3] = true;
         Info->_InputInformation.CurrentWinner = 0;

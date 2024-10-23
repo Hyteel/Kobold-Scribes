@@ -22,7 +22,7 @@ void UIContext::InitializeUIContext(const GameInformation &GMInfo) {
   //Tile UI
   UIElement TileUI;
 
-  TileUI.Bounds = (Rectangle){(SCREENWIDTH/2.f) - 200, (SCREENHEIGHT/2.f) - 100, 250, 200};
+  TileUI.Bounds = (Rectangle){(SCREENWIDTH/2.f) - 200, (SCREENHEIGHT/2.f) - 100, 400, 210};
 
 
   TileUI.DisplayText = "TILE-UI";
@@ -32,10 +32,10 @@ void UIContext::InitializeUIContext(const GameInformation &GMInfo) {
     (Rectangle){(SCREENWIDTH / 2.f) - 150, (SCREENHEIGHT / 2.f) - 50, 50, 50},
     (Rectangle){(SCREENWIDTH / 2.f) - 100, (SCREENHEIGHT / 2.f) - 50, 50, 50},
     (Rectangle){(SCREENWIDTH / 2.f) - 50, (SCREENHEIGHT / 2.f) - 50, 50, 50},
-    (Rectangle){(SCREENWIDTH/2.f) - 200, (SCREENHEIGHT/2.f) + 50, 50, 50},
-    (Rectangle){(SCREENWIDTH / 2.f) - 150, (SCREENHEIGHT / 2.f) + 50, 50, 50},
-    (Rectangle){(SCREENWIDTH / 2.f) - 100, (SCREENHEIGHT / 2.f) + 50, 50, 50},
-    (Rectangle){(SCREENWIDTH / 2.f) - 50, (SCREENHEIGHT / 2.f) + 50, 50, 50},
+    (Rectangle){(SCREENWIDTH/2.f) - 200, (SCREENHEIGHT/2.f) + 10, 50, 50},
+    (Rectangle){(SCREENWIDTH / 2.f) - 150, (SCREENHEIGHT / 2.f) + 10, 50, 50},
+    (Rectangle){(SCREENWIDTH / 2.f) - 100, (SCREENHEIGHT / 2.f) + 10, 50, 50},
+    (Rectangle){(SCREENWIDTH / 2.f) - 50, (SCREENHEIGHT / 2.f) + 10, 50, 50},
     (Rectangle){(SCREENWIDTH / 2.f), (SCREENHEIGHT / 2.f) - 50, 50, 50}
   };
 
@@ -44,10 +44,10 @@ void UIContext::InitializeUIContext(const GameInformation &GMInfo) {
     "SLOT2",
     "SLOT3",
     "SLOT4",
-    "SLOT1",
-    "SLOT2",
-    "SLOT3",
-    "SLOT4",
+    "SLOT5",
+    "SLOT6",
+    "SLOT7",
+    "SLOT8",
     "EXPAND"
   };
 
@@ -56,22 +56,42 @@ void UIContext::InitializeUIContext(const GameInformation &GMInfo) {
     Tile_Slot2,
     Tile_Slot3,
     Tile_Slot4,
-    Tile_Slot1, //X-CHECKOUT-X NO NEED FOR THEM TO BE UNIQUE, revisit the input system
-    Tile_Slot2,
-    Tile_Slot3,
-    Tile_Slot4,
-    Tile_Slot5
+    Tile_Slot5, //X-CHECKOUT-X NO NEED FOR THEM TO BE UNIQUE, revisit the input system
+    Tile_Slot6,
+    Tile_Slot7,
+    Tile_Slot8,
+    Tile_Slot9
   };
 
   TileUI.TextFields = {
     (Rectangle){(SCREENWIDTH / 2.f) - 180, (SCREENHEIGHT / 2.f) - 90, 50, 50},
-    (Rectangle){(SCREENWIDTH / 2.f) - 130, (SCREENHEIGHT / 2.f) - 90, 150, 50}
+    (Rectangle){(SCREENWIDTH / 2.f) - 130, (SCREENHEIGHT / 2.f) - 90, 150, 50},
+    (Rectangle){(SCREENWIDTH / 2.f) + 60, (SCREENHEIGHT / 2.f) - 80, 150, 20},
+    (Rectangle){(SCREENWIDTH / 2.f) + 60, (SCREENHEIGHT / 2.f) - 60, 150, 20},
+    (Rectangle){(SCREENWIDTH / 2.f) + 60, (SCREENHEIGHT / 2.f) - 40, 150, 20},
+    (Rectangle){(SCREENWIDTH / 2.f) + 60, (SCREENHEIGHT / 2.f) - 20, 150, 20},
+    (Rectangle){(SCREENWIDTH / 2.f) + 60, (SCREENHEIGHT / 2.f) - 0, 150, 20},
+    (Rectangle){(SCREENWIDTH / 2.f) + 60, (SCREENHEIGHT / 2.f) + 20, 150, 20},
+    (Rectangle){(SCREENWIDTH / 2.f) + 60, (SCREENHEIGHT / 2.f) + 40, 150, 20},
+    (Rectangle){(SCREENWIDTH / 2.f) + 60, (SCREENHEIGHT / 2.f) + 60, 150, 20},
+    (Rectangle){(SCREENWIDTH / 2.f) - 180, (SCREENHEIGHT / 2.f) + 60, 150, 20},
+    (Rectangle){(SCREENWIDTH / 2.f) - 180, (SCREENHEIGHT / 2.f) + 80, 150, 20},
   };
 
 
    TileUI.Text = {
      "0",
-     "NONE"
+     "NONE",
+     "Market Influence 1",
+     "Market Influence 2",
+     "Market Influence 3",
+     "Market Influence 4",
+     "Market Influence 5",
+     "Market Influence 6",
+     "Market Influence 7",
+     "Market Influence 8",
+     "Building Slots",
+     "Population",
    };
 
 
@@ -249,8 +269,23 @@ void UIContext::UpdateUIContext(const GameInformation &GMInfo) //Only needs to u
           UIElements[0].ButtonText[i] = LOC_BUILDINGS[GMInfo._InputInformation.CurrentTile->Buildings[i]];
         }
 
-      //UIElements[0].Text[0] = std::to_string(GMInfo._InputInformation.CurrentTile->Value).c_str();
       UIElements[0].Text[0] = LOC_TERRAIN[GMInfo._InputInformation.CurrentTile->Type];
+
+      for (int i = 2; i < 10; ++i)
+        {
+          std::string InfluenceText = "Market Influence ";
+          InfluenceText += TFFD(GMInfo.Markets[i - 2].IndexID) + " | " + TFFD(GMInfo._InputInformation.CurrentTile->MarketInfluences[i - 2]);
+          UIElements[0].Text[i] = InfluenceText;
+        }
+
+      std::string PopulationText = "Population: ";
+      PopulationText += TFFD(GMInfo._InputInformation.CurrentTile->Population);
+      UIElements[0].Text[10] = PopulationText;
+
+      std::string BuildingSlotText = "Building Slots: ";
+      BuildingSlotText += std::to_string(GMInfo._InputInformation.CurrentTile->UnlockedBuildSlots);
+      UIElements[0].Text[11] = BuildingSlotText;
+
 
       std::string MarketTileText = "Belongs to market: ";
 

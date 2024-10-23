@@ -122,7 +122,7 @@ const Building CBLuxuryResidence
   LuxuryResidence,
   std::vector<GoodsType>{CannedBread, Wood},
   std::vector<GoodsType>{},
-  std::vector<float>{5.f, 2.f},
+  std::vector<float>{2.f, 2.f},
   std::vector<float>{},
   3.f,
   15.f,

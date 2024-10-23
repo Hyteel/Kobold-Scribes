@@ -34,9 +34,23 @@ void GameTileGeneric::UpdatePopulation()
 {
   for (int i = 0; i < MAXTILEBUILDINGSLOTS; ++i)
     {
-      Population += CBBUILDINGS[Buildings[i]]->InfluenceGeneration;
-      UnlockedBuildSlots = std::clamp((int) std::round(Population / POPULATIONNEWHOUSEBREAKPOINT), STARTINGTILEBUILDSLOTS, MAXTILEBUILDINGSLOTS);
+      float Efficiency = 1.f;
+      const Building* CurrentBuilding = CBBUILDINGS[Buildings[i]];
+      int UniqueInputs = CurrentBuilding->InputTypes.size();
+
+      for (int i = 0; i < UniqueInputs; i++) //Calculate efficiency
+        {
+          Efficiency += Owner->GoodsEfficiency[CurrentBuilding->InputTypes[i]];
+        }
+
+      Efficiency = std::clamp(Efficiency, 0.0f, 1.0f);
+
+
+
+      Population += CBBUILDINGS[Buildings[i]]->InfluenceGeneration * BASEPOPULATIONGROWTHMODIFIER * Owner->PopulationGrowthModifer * Efficiency; //X-CHECKOUT-X MOVE TO THE BUILDING LOGIC, DO NOT HAVE DETACHED
     }
+
+  UnlockedBuildSlots = std::clamp((int) std::round(Population / POPULATIONNEWHOUSEBREAKPOINT), STARTINGTILEBUILDSLOTS, MAXTILEBUILDINGSLOTS);
 }
 
 
