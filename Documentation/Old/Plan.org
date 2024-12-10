@@ -1,0 +1,31 @@
+#+TITLE: PLAN
+
+Rest of the features/parts for the duration of this development course
+
+--------
+!NOTICE!
+
+Instead of rewriting the project like originally planned,
+the current iteration will be refined and worked on to allow the addition of more features
+--------
+
+* Features
+** DONE [#A] Static world map - Top
+CLOSED: [2024-10-21 Mon 10:55]
+** DONE [#B] Specialized tiles
+CLOSED: [2024-10-21 Mon 10:55]
+
+** TODO [#A] Pop and Influence rework
+** TODO [#A] Trade V2
+** TODO [#C] More buildings/goods (chain at most 3 length)
+
+
+** +TODO [#C] Building times+ (Unecessary, for now)
+
+* Art
+** DONE [#A] Tile art, world art - Top
+CLOSED: [2024-10-21 Mon 10:55]
+
+
+** +TODO [#A] Building times+
+** +TODO [#C] UI redesign - New UI system+ (Too much work, too little payout)

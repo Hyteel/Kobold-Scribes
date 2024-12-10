@@ -1,31 +1,36 @@
-#+TITLE: PLAN
+#+TITLE: Kobold Scribes SDL
+#+TITLE: A Plan for a complete Kobold Scribes
 
-Rest of the features/parts for the duration of this development course
+* Introduction
 
---------
-!NOTICE!
+Kobold scribes started out as a project for the Project Course at my University. It was meant to be a contained project that was very limited in scope, a strategy game built in Raylib that focused on trade.
 
-Instead of rewriting the project like originally planned,
-the current iteration will be refined and worked on to allow the addition of more features
---------
+I consider it a success, despite the unbalanced and simple nature of it. But after trying to expand upon it after the course was done (as I had planned) I quickly got bogged down in code that was written weeks ago with different systems in mind. I needed a hard reset of the Project.
 
-* Features
-** DONE [#A] Static world map - Top
-CLOSED: [2024-10-21 Mon 10:55]
-** DONE [#B] Specialized tiles
-CLOSED: [2024-10-21 Mon 10:55]
+After some advice from my councillor, I decided to do it this time in SDL to allow me even more freedom and control over what happens, and especially so that the implementation of multiplayer, one of the things I had planned for from the start could be done.
 
-** TODO [#A] Pop and Influence rework
-** TODO [#A] Trade V2
-** TODO [#C] More buildings/goods (chain at most 3 length)
+This time I use all the knowledge I have gathered, not only for how the game should be structured from a game design/code point of view but also how I should handle documentation/work ethic to try and create a more solid foundation that I can use to create the my dream game.
+
+The ultimate goal of this project is to be a multiplayer game I can play and develop with my friends but also a game suited for machine learning AI to be tested upon during my Thesis Project.
+
+This document will serve as a hub for my documentation attempts and before I start doing something more standardized / rigid I need to get the basics done first. They go as follows:
+
+** TODO Create basic SDL developer space
+*** TODO CMAKE
+*** TODO Basic Input
+*** TODO Basic Networking
+*** TODO Basic UI
+
+** TODO Work out proper game documentation
+*** TODO GDD (OnePage)
+*** TODO Mechanic flowchart and dictionary
+
+** TODO Create and document the auxilliary documents
+*** TODO Logging
+*** TODO Daily Planning
+*** TODO Weekly Planning structure
 
 
-** +TODO [#C] Building times+ (Unecessary, for now)
+Once these are done I will start working on the project in full, but I will not rush ahead as with the first iteration, as I had to pay for improper documentation, lack of a fleshed out game design and bad daily and weekly planning.
 
-* Art
-** DONE [#A] Tile art, world art - Top
-CLOSED: [2024-10-21 Mon 10:55]
-
-
-** +TODO [#A] Building times+
-** +TODO [#C] UI redesign - New UI system+ (Too much work, too little payout)
+This is officially the first part of the new project.
