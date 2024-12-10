@@ -70,7 +70,8 @@ int main(void)
   //--------------------------------------------------------------------------------------
   // Game Initialization
   GameInformation GameInformationMain;
-  GameInformationMain.InitializeGameInfornamtion();
+  GameInformationMain.
+    InitializeGameInfornamtion();
   GameInformationMain._UIContext.InitializeUIContext(GameInformationMain);
 
   GameInformationMain._UIContext.UIElementDisplayTrigger[2] = true;
